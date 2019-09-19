@@ -18,6 +18,7 @@
     <module>magic-starter-bom</module>
     <module>magic-core-auto</module>
     <module>magic-core-tool</module>
+    <module>magic-starter-secure</module>
   </modules>
 
   <properties>

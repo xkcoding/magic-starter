@@ -19,43 +19,33 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>spring-cloud-dependencies-parent</artifactId>
-    <groupId>org.springframework.cloud</groupId>
-    <version>2.1.7.RELEASE</version>
-    <relativePath/>
+    <artifactId>Magic-Starter</artifactId>
+    <groupId>com.xkcoding</groupId>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>magic-starter-bom</artifactId>
+  <artifactId>magic-starter-secure</artifactId>
+  <name>${project.artifactId}</name>
   <version>${magic-starter.version}</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <description>
-    Magic Starter 依赖版本管理
+    Magic Secure 轻量级鉴权脚手架
   </description>
 
-  <properties>
-    <magic-starter.version>0.0.1-SNAPSHOT</magic-starter.version>
-  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.xkcoding</groupId>
+      <artifactId>magic-core-tool</artifactId>
+      <optional>true</optional>
+    </dependency>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-core-auto</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-core-tool</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-starter-secure</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+    <dependency>
+      <groupId>com.xkcoding</groupId>
+      <artifactId>magic-core-auto</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
 
 </project>
