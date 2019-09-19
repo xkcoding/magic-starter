@@ -13,44 +13,48 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  ~
   -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>spring-cloud-dependencies-parent</artifactId>
-    <groupId>org.springframework.cloud</groupId>
-    <version>2.1.7.RELEASE</version>
-    <relativePath/>
+    <artifactId>Magic-Starter</artifactId>
+    <groupId>com.xkcoding</groupId>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>magic-starter-bom</artifactId>
+  <artifactId>magic-core-tool</artifactId>
+  <name>${project.artifactId}</name>
   <version>${magic-starter.version}</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <description>
-    Magic Starter 依赖版本管理
+    Magic Starter 核心工具包
   </description>
 
   <properties>
-    <magic-starter.version>0.0.1-SNAPSHOT</magic-starter.version>
+    <guava.version>28.1-jre</guava.version>
+    <hutool.version>4.6.6</hutool.version>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-core-auto</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-core-tool</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>${hutool.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.xkcoding</groupId>
+      <artifactId>magic-core-auto</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
 
 </project>
