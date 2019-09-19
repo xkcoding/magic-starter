@@ -1,0 +1,28 @@
+# Created by .ignore support plugin (hsz.mobi)
+### common-ignore template
+### GIT IGNORE FILE ###
+
+### MAC ###
+.DS_Store
+
+### IDEA ###
+.idea
+*.iml
+
+### ECLIPSE ###
+.classpath
+.metadata
+.settings
+.project
+.factorypath
+
+### JAVA ###
+logs
+target
+
+### JS ###
+node_modules
+dist
+
+### OTHERS ###
+build
