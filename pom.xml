@@ -99,14 +99,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- magic starter 版本控制 -->
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>magic-starter-bom</artifactId>
-        <version>${magic-starter.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 

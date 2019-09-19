@@ -94,7 +94,7 @@ public class SpringUtil implements ApplicationContextAware {
 	 */
 	public static ApplicationContext getContext() {
 		if (context == null) {
-			return null;
+			throw new RuntimeException("There has no Spring ApplicationContext!");
 		}
 		return context;
 	}
