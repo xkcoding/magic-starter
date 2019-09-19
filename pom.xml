@@ -14,7 +14,9 @@
     一套神奇的starter，只为爱“偷懒”的你~
   </description>
 
-
+  <modules>
+    <module>magic-starter-bom</module>
+  </modules>
 
   <properties>
     <magic-starter.version>0.0.1-SNAPSHOT</magic-starter.version>
@@ -91,6 +93,14 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
         <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- magic starter 版本控制 -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>magic-starter-bom</artifactId>
+        <version>${magic-starter.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
