@@ -16,6 +16,7 @@
 
   <modules>
     <module>magic-starter-bom</module>
+    <module>magic-core-auto</module>
   </modules>
 
   <properties>
