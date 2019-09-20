@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xkcoding.magic.core.tool;
+package com.xkcoding.magic.core.tool.exception;
 
 import com.xkcoding.magic.core.tool.api.IResultCode;
 import com.xkcoding.magic.core.tool.enums.CommonResultCode;
