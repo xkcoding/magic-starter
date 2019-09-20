@@ -44,6 +44,7 @@ public class SecureAutoConfiguration implements WebMvcConfigurer {
 	private final SecureExpressionHandler secureExpressionHandler;
 	private final SecureProperties secureProperties;
 	private final List<Rule> ruleList;
+	private final List<String> whiteList;
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -52,6 +53,6 @@ public class SecureAutoConfiguration implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new SecureInterceptor(ruleList, secureExpressionHandler)).excludePathPatterns(secureProperties.getWhiteList());
+		registry.addInterceptor(new SecureInterceptor(ruleList, secureExpressionHandler)).excludePathPatterns(whiteList);
 	}
 }

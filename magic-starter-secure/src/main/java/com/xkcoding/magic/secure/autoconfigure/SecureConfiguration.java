@@ -80,4 +80,16 @@ public class SecureConfiguration implements WebMvcConfigurer {
 		}
 		return ruleList;
 	}
+
+	@Bean
+	@ConditionalOnMissingBean(SecureRuleRegistry.class)
+	public List<String> whiteListFromProperties(SecureProperties properties) {
+		return properties.getWhiteList();
+	}
+
+	@Bean
+	@ConditionalOnBean(SecureRuleRegistry.class)
+	public List<String> whiteListFromRegistry(SecureRuleRegistry secureRuleRegistry) {
+		return secureRuleRegistry.getWhiteList();
+	}
 }

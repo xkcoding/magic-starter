@@ -16,8 +16,8 @@
 
 package com.xkcoding.magic.secure.support;
 
-import com.xkcoding.magic.secure.model.Rule;
 import com.xkcoding.magic.secure.enums.HttpMethod;
+import com.xkcoding.magic.secure.model.Rule;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -34,6 +34,7 @@ import java.util.List;
 @Data
 public class SecureRuleRegistry {
 	private List<Rule> ruleList = new ArrayList<>();
+	private List<String> whiteList = new ArrayList<>();
 
 	/**
 	 * 添加鉴权规则
@@ -45,6 +46,17 @@ public class SecureRuleRegistry {
 	 */
 	public SecureRuleRegistry addRule(String path, HttpMethod method, String expression) {
 		ruleList.add(new Rule(path, method, expression));
+		return this;
+	}
+
+	/**
+	 * 添加排除路径
+	 *
+	 * @param path 路径
+	 * @return 当前对象
+	 */
+	public SecureRuleRegistry exclude(String path) {
+		whiteList.add(path);
 		return this;
 	}
 }
