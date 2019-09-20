@@ -38,9 +38,9 @@ public class Rule {
 	 */
 	private String path;
 	/**
-	 * 请求方法
+	 * 请求方法，默认 {@link HttpMethod#ANY}
 	 */
-	private HttpMethod method;
+	private HttpMethod method = HttpMethod.ANY;
 	/**
 	 * spel表达式
 	 */
