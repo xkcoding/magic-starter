@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://github.com/xkcoding/magic-starter" target="_blank">Magic-Starter</a></h1>
+<h1 align="center"><a href="https://github.com/xkcoding/magic-starter/magic-starter-bom" target="_blank">magic-starter-bom</a></h1>
 <p align="center">
 <a href="https://travis-ci.com/xkcoding/magic-starter" target="_blank"><img alt="Travis-CI" src="https://travis-ci.com/xkcoding/magic-starter.svg?branch=master"/></a>
   <a href="https://search.maven.org/artifact/com.xkcoding/magic-starter-bom" target="_blank"><img alt="MAVEN" src="https://img.shields.io/maven-central/v/com.xkcoding/magic-starter-bom.svg?color=brightgreen&label=Maven%20Central"></a>
@@ -11,5 +11,23 @@
 
 ## 简介
 
-一组神奇的 starter 套件，只为爱“偷懒”的你~
+`magic-starter-bom` 主要是对 `Magic-Starter` 下各个模块的版本管理。
+
+## 使用
+
+在 pom.xml 文件中配置依赖管理，后续引入 `Magic-Starter` 其余模块，均可以不配置具体版本号信息。
+
+```xml
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.xkcoding</groupId>
+      <artifactId>magic-starter-bom</artifactId>
+      <version>${magic-starter.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+```
 
