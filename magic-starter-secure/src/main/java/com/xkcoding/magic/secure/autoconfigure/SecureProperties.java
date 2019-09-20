@@ -66,7 +66,7 @@ public class SecureProperties {
 		private Duration timeout = Duration.ofDays(7);
 
 		/**
-		 * 加签的算法，默认sha512
+		 * 加密的算法，默认sha512
 		 */
 		private SignatureAlgorithm algorithm = SignatureAlgorithm.HS512;
 	}
