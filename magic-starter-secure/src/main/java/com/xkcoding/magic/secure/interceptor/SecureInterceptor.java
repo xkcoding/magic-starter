@@ -16,9 +16,9 @@
 
 package com.xkcoding.magic.secure.interceptor;
 
-import com.xkcoding.magic.secure.model.Rule;
 import com.xkcoding.magic.secure.enums.HttpMethod;
 import com.xkcoding.magic.secure.exception.SecureException;
+import com.xkcoding.magic.secure.model.Rule;
 import com.xkcoding.magic.secure.support.SecureExpressionHandler;
 import com.xkcoding.magic.secure.util.SecureCheckUtil;
 import lombok.RequiredArgsConstructor;

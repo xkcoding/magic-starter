@@ -17,6 +17,7 @@
 package com.xkcoding.magic.secure.autoconfigure;
 
 import com.xkcoding.magic.secure.model.Rule;
+import com.xkcoding.magic.secure.support.DefaultSecureExpressionHandler;
 import com.xkcoding.magic.secure.support.SecureExpressionHandler;
 import com.xkcoding.magic.secure.support.SecureRuleRegistry;
 import com.xkcoding.magic.secure.support.SecureUserArgumentResolver;
@@ -56,8 +57,9 @@ public class SecureConfiguration implements WebMvcConfigurer {
 	}
 
 	@Bean
+	@ConditionalOnMissingBean(SecureExpressionHandler.class)
 	public SecureExpressionHandler secureExpressionHandler(SecureUtil secureUtil) {
-		return new SecureExpressionHandler(secureUtil);
+		return new DefaultSecureExpressionHandler(secureUtil);
 	}
 
 	@Bean

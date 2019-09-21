@@ -42,7 +42,6 @@ import java.util.List;
 public class SecureAutoConfiguration implements WebMvcConfigurer {
 	private final SecureUserArgumentResolver secureUserArgumentResolver;
 	private final SecureExpressionHandler secureExpressionHandler;
-	private final SecureProperties secureProperties;
 	private final List<Rule> ruleList;
 	private final List<String> whiteList;
 
