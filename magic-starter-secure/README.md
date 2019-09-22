@@ -123,8 +123,44 @@ public class SecureConfig {
 }
 ```
 
+### 自定义权限控制表达式处理
+
+> 懒人请看：https://github.com/xkcoding/magic-starter-secure-demo/tree/master/custom-secure-handler
+
+```java
+/**
+ * <p>
+ * 自定义权限控制表达式处理
+ * </p>
+ *
+ * @author yangkai.shen
+ * @date Created in 2019/9/21 10:20
+ */
+@Slf4j
+public class CustomSecureExpressionHandler implements SecureExpressionHandler {
+    public boolean testSecure(String key) {
+        int randomInt = RandomUtil.randomInt(1, 10);
+        log.info("【randomInt】= {}", randomInt);
+
+        boolean ret = randomInt > 5;
+        log.info("【key】= {}，{} 权限", key, ret ? "有" : "无");
+        return ret;
+    }
+}
+
+@Configuration
+public class SecureConfig {
+    @Bean
+    public SecureExpressionHandler secureExpressionHandler(){
+        return new CustomSecureExpressionHandler();
+    }
+}
+```
+
 ## 特点
 
 - 基于Jwt
 - 支持 SpEL 表达式，基于AOP的方案，支持解析自定义参数，基于拦截器方案，内置 request 及 response 参数
+- 暴露表达式处理端点，支持自定义表达式处理，同时支持自定义 Spring Bean 处理
 - 不关心登录逻辑，只关心登录后的权限控制
+
