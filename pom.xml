@@ -19,6 +19,7 @@
     <module>magic-core-auto</module>
     <module>magic-core-tool</module>
     <module>magic-starter-secure</module>
+    <module>magic-starter-message</module>
   </modules>
 
   <properties>

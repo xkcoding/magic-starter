@@ -13,8 +13,8 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  ~
   -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -25,41 +25,22 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>magic-starter-bom</artifactId>
+  <artifactId>magic-starter-message</artifactId>
+  <name>${project.artifactId}</name>
   <version>${magic-starter.version}</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <description>
-    Magic Starter 依赖版本管理
+    Magic Message 集成多种消息通知，包括钉钉机器人，各类邮件，阿里大鱼，微信
   </description>
 
-  <properties>
-    <magic-starter.version>0.0.1-SNAPSHOT</magic-starter.version>
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-core-auto</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-core-tool</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-starter-secure</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.xkcoding</groupId>
-        <artifactId>magic-starter-message</artifactId>
-        <version>${magic-starter.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.xkcoding</groupId>
+      <artifactId>magic-core-auto</artifactId>
+      <version>${magic-starter.version}</version>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
 
 </project>
