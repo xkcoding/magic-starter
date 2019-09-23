@@ -21,6 +21,7 @@
     <module>magic-starter-secure</module>
     <module>magic-starter-message</module>
     <module>magic-starter-log</module>
+    <module>magic-starter-locker</module>
   </modules>
 
   <properties>
