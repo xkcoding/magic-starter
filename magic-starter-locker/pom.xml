@@ -31,7 +31,7 @@
   <packaging>jar</packaging>
 
   <description>
-    Magic Locker 分布式锁，zookeeper/redis 两种实现方式
+    Magic Locker 分布式锁，Zookeeper/Redis 两种实现方式
   </description>
 
   <dependencies>
