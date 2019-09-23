@@ -17,6 +17,7 @@
 package com.xkcoding.magic.secure.aspect;
 
 import cn.hutool.core.util.StrUtil;
+import com.xkcoding.magic.core.tool.constants.MagicConsts;
 import com.xkcoding.magic.core.tool.util.ClassUtil;
 import com.xkcoding.magic.secure.annotation.Secure;
 import com.xkcoding.magic.secure.exception.SecureException;
@@ -29,6 +30,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +47,7 @@ import java.lang.reflect.Method;
 @Slf4j
 @Aspect
 @Component
+@Order(MagicConsts.AOP_ORDER_SECURE)
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class SecureAspect {
 	private final SecureExpressionHandler secureExpressionHandler;
