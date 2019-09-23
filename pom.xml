@@ -23,6 +23,7 @@
     <module>magic-starter-log</module>
     <module>magic-starter-locker</module>
     <module>magic-starter-ratelimiter</module>
+    <module>magic-starter-oss</module>
   </modules>
 
   <properties>
