@@ -59,6 +59,11 @@
         <artifactId>magic-starter-message</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.xkcoding</groupId>
+        <artifactId>magic-starter-log</artifactId>
+        <version>${magic-starter.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

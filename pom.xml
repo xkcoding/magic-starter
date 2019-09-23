@@ -20,6 +20,7 @@
     <module>magic-core-tool</module>
     <module>magic-starter-secure</module>
     <module>magic-starter-message</module>
+    <module>magic-starter-log</module>
   </modules>
 
   <properties>
