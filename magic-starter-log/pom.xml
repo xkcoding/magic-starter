@@ -37,6 +37,18 @@
   <dependencies>
     <dependency>
       <groupId>com.xkcoding</groupId>
+      <artifactId>magic-core-tool</artifactId>
+      <version>${magic-starter.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.xkcoding</groupId>
       <artifactId>magic-core-auto</artifactId>
       <version>${magic-starter.version}</version>
       <optional>true</optional>
