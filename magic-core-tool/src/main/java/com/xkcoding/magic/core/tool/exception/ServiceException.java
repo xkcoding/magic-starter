@@ -60,18 +60,4 @@ public class ServiceException extends RuntimeException {
 		data = null;
 	}
 
-	/**
-	 * 提高性能
-	 *
-	 * @return Throwable
-	 */
-	@Override
-	public Throwable fillInStackTrace() {
-		return this;
-	}
-
-	public Throwable doFillInStackTrace() {
-		return super.fillInStackTrace();
-	}
-
 }

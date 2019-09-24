@@ -16,18 +16,18 @@
 
 package com.xkcoding.magic.core.tool.util;
 
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.lang.Validator;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.xkcoding.magic.core.tool.autoconfigure.ToolProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.lionsoul.ip2region.DataBlock;
-import org.lionsoul.ip2region.DbConfig;
-import org.lionsoul.ip2region.DbSearcher;
-import org.lionsoul.ip2region.Util;
+import org.lionsoul.ip2region.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -71,20 +71,15 @@ public class IpUtil {
 
 			ToolProperties toolProperties = SpringUtil.getBean(ToolProperties.class);
 
-			DbSearcher searcher = new DbSearcher(config, ResourceUtil.getResource(toolProperties.getIpRegion().getDbFile()).getFile());
-			DataBlock dataBlock;
-			switch (toolProperties.getIpRegion().getSearchType()) {
-				case B_TREE:
-					dataBlock = searcher.btreeSearch(ip);
-					break;
-				case BINARY:
-					dataBlock = searcher.binarySearch(ip);
-					break;
-				case MEMORY:
-				default:
-					dataBlock = searcher.memorySearch(ip);
-					break;
+			InputStream streamSafe = ResourceUtil.getStreamSafe(toolProperties.getIpRegion().getDbFile());
+
+			if (streamSafe == null) {
+				log.error("【获取地理位置】未找到 IP 数据库文件，请前往 https://github.com/xkcoding/magic-starter/tree/master/magic-core-tool/src/main/resources/ip/ip2region.db 下载！");
+				return address;
 			}
+
+			DbSearcher searcher = new DbSearcher(config, IoUtil.readBytes(streamSafe));
+			DataBlock dataBlock = searcher.memorySearch(ip);
 
 			// dataBlock格式：城市Id|国家|区域|省份|城市|ISP
 			// region格式：国家|区域|省份|城市|ISP
@@ -97,8 +92,8 @@ public class IpUtil {
 			List<String> regionListFilter = regionList.stream().filter(s -> !StrUtil.equals(StrUtil.ZERO, s)).distinct().collect(Collectors.toList());
 			// 再用 | 拼接回来
 			address = Joiner.on("|").join(regionListFilter);
-		} catch (Exception e) {
-			log.error("【获取地理位置】发生异常:", e);
+		} catch (IOException | DbMakerConfigException e) {
+			log.error("【获取地理位置】发生异常: ", e);
 		}
 		return address;
 	}

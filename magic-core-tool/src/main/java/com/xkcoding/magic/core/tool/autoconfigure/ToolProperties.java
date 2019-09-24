@@ -16,7 +16,6 @@
 
 package com.xkcoding.magic.core.tool.autoconfigure;
 
-import com.xkcoding.magic.core.tool.enums.Ip2RegionSearchType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -34,7 +33,7 @@ public class ToolProperties {
 	/**
 	 * ip2region 配置.
 	 */
-	private Ip2RegionProperties ipRegion;
+	private Ip2RegionProperties ipRegion = new Ip2RegionProperties();
 
 	@Data
 	public static class Ip2RegionProperties {
@@ -43,9 +42,5 @@ public class ToolProperties {
 		 * 该文件可以从 https://github.com/xkcoding/magic-starter/tree/master/magic-core-tool/src/main/resources/ip/ip2region.db 下载
 		 */
 		private String dbFile = "ip/ip2region.db";
-		/**
-		 * 查询方式
-		 */
-		private Ip2RegionSearchType searchType = Ip2RegionSearchType.MEMORY;
 	}
 }
