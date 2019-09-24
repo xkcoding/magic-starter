@@ -26,6 +26,7 @@ import com.xkcoding.magic.secure.util.SecureUtil;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,6 +46,7 @@ import java.util.List;
 @Configuration
 @AutoConfigureBefore({SecureAutoConfiguration.class})
 @EnableConfigurationProperties({SecureProperties.class})
+@ConditionalOnProperty(value = "magic.secure.enabled", havingValue = "true", matchIfMissing = true)
 public class SecureConfiguration implements WebMvcConfigurer {
 	@Bean
 	public JwtUtil jwtUtil(SecureProperties properties) {

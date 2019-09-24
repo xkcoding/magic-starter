@@ -30,6 +30,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
@@ -49,6 +50,7 @@ import java.lang.reflect.Method;
 @Component
 @Order(MagicConsts.AOP_ORDER_SECURE)
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
+@ConditionalOnProperty(value = "magic.secure.enabled", havingValue = "true", matchIfMissing = true)
 public class SecureAspect {
 	private final SecureExpressionHandler secureExpressionHandler;
 

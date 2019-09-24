@@ -34,20 +34,24 @@ import java.util.List;
  * @date Created in 2019/9/18 18:23
  */
 @Data
-@ConfigurationProperties(prefix = "secure")
+@ConfigurationProperties(prefix = "magic.secure")
 public class SecureProperties {
 	/**
-	 * jwt 配置类
+	 * 是否启用 magic secure.
+	 */
+	private boolean enabled = true;
+	/**
+	 * jwt 配置类.
 	 */
 	private Jwt jwt = new Jwt();
 
 	/**
-	 * 规则列表
+	 * 规则列表.
 	 */
 	private List<Rule> ruleList = new ArrayList<>();
 
 	/**
-	 * 白名单
+	 * 白名单.
 	 */
 	private List<String> whiteList = new ArrayList<>();
 

@@ -22,6 +22,7 @@ import com.xkcoding.magic.secure.support.SecureExpressionHandler;
 import com.xkcoding.magic.secure.support.SecureUserArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -39,6 +40,7 @@ import java.util.List;
  */
 @Configuration
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
+@ConditionalOnProperty(value = "magic.secure.enabled", havingValue = "true", matchIfMissing = true)
 public class SecureAutoConfiguration implements WebMvcConfigurer {
 	private final SecureUserArgumentResolver secureUserArgumentResolver;
 	private final SecureExpressionHandler secureExpressionHandler;
