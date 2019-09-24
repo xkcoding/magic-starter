@@ -58,6 +58,21 @@ public class SecureUtil {
 		if (secureUser == null) {
 			// 从 token 里获取
 			HttpServletRequest request = getRequest();
+			secureUser = getCurrentUser(request);
+		}
+		return secureUser;
+	}
+
+	/**
+	 * 返回当前用户信息
+	 *
+	 * @param request 请求
+	 * @return 当前用户信息
+	 */
+	public SecureUser getCurrentUser(HttpServletRequest request) {
+		SecureUser secureUser = UserContextHolder.get();
+		if (secureUser == null) {
+			// 从 token 里获取
 			String token = getTokenFromRequest(request);
 			// 校验 token 是否合法
 			Boolean isValid = jwtUtil.validateToken(token);
