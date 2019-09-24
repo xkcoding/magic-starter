@@ -54,6 +54,9 @@ public class IpUtil {
 	 */
 	public static final String LOCAL_IP = "127.0.0.1";
 
+	/**
+	 * 根据ip获取城市信息
+	 */
 	public static String getAddress(String ip) {
 		if (StrUtil.equals(ip, IpUtil.LOCAL_INNER_LOOP_IP)) {
 			ip = IpUtil.LOCAL_IP;
