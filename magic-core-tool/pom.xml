@@ -37,6 +37,7 @@
   <properties>
     <guava.version>28.1-jre</guava.version>
     <hutool.version>4.6.6</hutool.version>
+    <ip2region.version>1.7.2</ip2region.version>
   </properties>
 
   <dependencies>
@@ -50,6 +51,12 @@
       <artifactId>hutool-all</artifactId>
       <version>${hutool.version}</version>
     </dependency>
+    <!-- ip2region: ip地理位置解析 -->
+    <dependency>
+      <groupId>org.lionsoul</groupId>
+      <artifactId>ip2region</artifactId>
+      <version>${ip2region.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.xkcoding</groupId>
       <artifactId>magic-core-auto</artifactId>
@@ -57,5 +64,17 @@
       <optional>true</optional>
     </dependency>
   </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <excludes>
+          <exclude>*</exclude>
+        </excludes>
+      </resource>
+    </resources>
+  </build>
 
 </project>

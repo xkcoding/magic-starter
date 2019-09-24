@@ -29,6 +29,10 @@ public class StrUtil extends cn.hutool.core.util.StrUtil {
 	public static final String UTF_8 = "UTF-8";
 	public static final String GBK = "GBK";
 	public static final String ISO_8859_1 = "ISO-8859-1";
+	public static final String Y = "y";
+	public static final String YES = "yes";
+	public static final String ONE = "1";
+	public static final String ZERO = "0";
 
 	/**
 	 * 创建StringBuilder对象
