@@ -37,7 +37,7 @@ import java.util.List;
 @ConfigurationProperties(prefix = "magic.secure")
 public class SecureProperties {
 	/**
-	 * 是否启用 magic secure.
+	 * 是否启用 magic secure，默认 true.
 	 */
 	private boolean enabled = true;
 	/**
