@@ -19,8 +19,10 @@ package com.xkcoding.magic.secure.util;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import com.xkcoding.magic.secure.constants.SecureConstants;
-import com.xkcoding.magic.secure.model.SecureUser;
+import com.xkcoding.magic.secure.exception.InvalidTokenException;
+import com.xkcoding.magic.secure.exception.NotFoundTokenException;
 import com.xkcoding.magic.secure.exception.SecureException;
+import com.xkcoding.magic.secure.model.SecureUser;
 import com.xkcoding.magic.secure.support.UserContextHolder;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -94,14 +96,14 @@ public class SecureUtil {
 	private String getTokenFromRequest(HttpServletRequest request) {
 		String header = request.getHeader(SecureConstants.AUTHORIZATION_HEADER);
 		if (StringUtils.isEmpty(header)) {
-			throw new SecureException("User is not login!");
+			throw new NotFoundTokenException("User is not login!");
 		}
 		if (header.length() <= SEVEN) {
-			throw new SecureException("Token invalid，length <= 7!");
+			throw new InvalidTokenException("Token invalid，length <= 7!");
 		}
 
 		if (!header.startsWith(SecureConstants.BEARER)) {
-			throw new SecureException("Token invalid, must be started with 'Bearer '!");
+			throw new InvalidTokenException("Token invalid, must be started with 'Bearer '!");
 		}
 
 		return header.substring(SEVEN);

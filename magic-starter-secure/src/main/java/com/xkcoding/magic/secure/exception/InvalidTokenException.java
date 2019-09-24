@@ -18,22 +18,22 @@ package com.xkcoding.magic.secure.exception;
 
 /**
  * <p>
- * 权限控制异常基类
+ * Token 不合法异常
  * </p>
  *
  * @author yangkai.shen
- * @date Created in 2019/9/18 16:03
+ * @date Created in 2019/9/24 10:22
  */
-public class SecureException extends RuntimeException {
-	public SecureException(Throwable cause) {
+public class InvalidTokenException extends TokenException {
+	public InvalidTokenException(Throwable cause) {
 		super(cause);
 	}
 
-	public SecureException(String message) {
+	public InvalidTokenException(String message) {
 		super(message);
 	}
 
-	public SecureException(String message, Throwable cause) {
+	public InvalidTokenException(String message, Throwable cause) {
 		super(message, cause);
 	}
 }

@@ -20,7 +20,7 @@ import cn.hutool.core.util.StrUtil;
 import com.xkcoding.magic.core.tool.constants.MagicConsts;
 import com.xkcoding.magic.core.tool.util.ClassUtil;
 import com.xkcoding.magic.secure.annotation.Secure;
-import com.xkcoding.magic.secure.exception.SecureException;
+import com.xkcoding.magic.secure.exception.AuthorizationException;
 import com.xkcoding.magic.secure.support.SecureExpressionHandler;
 import com.xkcoding.magic.secure.util.SecureCheckUtil;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +57,7 @@ public class SecureAspect {
 		if (validateSecure(joinPoint)) {
 			return joinPoint.proceed();
 		}
-		throw new SecureException("Access Denied!");
+		throw new AuthorizationException("Access Denied!");
 	}
 
 	/**

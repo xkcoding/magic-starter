@@ -164,3 +164,11 @@ public class SecureConfig {
 - 暴露表达式处理端点，支持自定义表达式处理，同时支持自定义 Spring Bean 处理
 - 不关心登录逻辑，只关心登录后的权限控制
 
+## 异常说明
+
+- `com.xkcoding.magic.secure.exception.SecureException`: 权限控制异常基类
+- `com.xkcoding.magic.secure.exception.NotFoundTokenException`: 未找到 Token 异常
+- `com.xkcoding.magic.secure.exception.InvalidTokenException`: Token 不合法异常
+- `com.xkcoding.magic.secure.exception.ExpiredTokenException`: Token 过期异常
+- `com.xkcoding.magic.secure.exception.AuthorizationException`: 权限校验异常
+

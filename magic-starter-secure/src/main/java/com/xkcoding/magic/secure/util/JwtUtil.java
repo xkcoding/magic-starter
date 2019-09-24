@@ -17,8 +17,9 @@
 package com.xkcoding.magic.secure.util;
 
 import com.xkcoding.magic.secure.autoconfigure.SecureProperties;
+import com.xkcoding.magic.secure.exception.ExpiredTokenException;
+import com.xkcoding.magic.secure.exception.InvalidTokenException;
 import com.xkcoding.magic.secure.model.SecureUser;
-import com.xkcoding.magic.secure.exception.SecureException;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,8 +54,10 @@ public class JwtUtil {
 		try {
 			return Jwts.parser().setSigningKey(this.secureProperties.getJwt().getSecret().getBytes()).parseClaimsJws(token).getBody();
 
-		} catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e) {
-			throw new SecureException("Token invalid!", e);
+		} catch (ExpiredJwtException e) {
+			throw new ExpiredTokenException("Token is expired!", e);
+		} catch (UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e) {
+			throw new InvalidTokenException("Token invalid!", e);
 		}
 	}
 
