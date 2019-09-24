@@ -20,7 +20,6 @@ import com.xkcoding.magic.secure.annotation.CurrentUser;
 import com.xkcoding.magic.secure.model.SecureUser;
 import com.xkcoding.magic.secure.util.SecureUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -35,7 +34,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * @author yangkai.shen
  * @date Created in 2019/9/19 10:07
  */
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
+@RequiredArgsConstructor
 public class SecureUserArgumentResolver implements HandlerMethodArgumentResolver {
 	private final SecureUtil secureUtil;
 

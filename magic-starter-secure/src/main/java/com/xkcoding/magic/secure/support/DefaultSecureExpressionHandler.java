@@ -19,7 +19,6 @@ package com.xkcoding.magic.secure.support;
 import com.xkcoding.magic.secure.model.SecureUser;
 import com.xkcoding.magic.secure.util.SecureUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.PatternMatchUtils;
 
 /**
@@ -30,7 +29,7 @@ import org.springframework.util.PatternMatchUtils;
  * @author yangkai.shen
  * @date Created in 2019/9/18 16:38
  */
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
+@RequiredArgsConstructor
 public class DefaultSecureExpressionHandler implements SecureExpressionHandler {
 	private final SecureUtil secureUtil;
 

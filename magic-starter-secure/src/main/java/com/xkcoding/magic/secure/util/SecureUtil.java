@@ -26,7 +26,6 @@ import com.xkcoding.magic.secure.model.SecureUser;
 import com.xkcoding.magic.secure.support.UserContextHolder;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -43,7 +42,7 @@ import java.util.List;
  * @author yangkai.shen
  * @date Created in 2019/9/18 17:08
  */
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
+@RequiredArgsConstructor
 public class SecureUtil {
 	private static final int SEVEN = 7;
 	private final JwtUtil jwtUtil;

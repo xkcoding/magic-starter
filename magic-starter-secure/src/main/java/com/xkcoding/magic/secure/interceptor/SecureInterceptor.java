@@ -22,7 +22,6 @@ import com.xkcoding.magic.secure.model.Rule;
 import com.xkcoding.magic.secure.support.SecureExpressionHandler;
 import com.xkcoding.magic.secure.util.SecureCheckUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -39,7 +38,7 @@ import java.util.List;
  * @author yangkai.shen
  * @date Created in 2019/9/19 10:56
  */
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
+@RequiredArgsConstructor
 public class SecureInterceptor extends HandlerInterceptorAdapter {
 	private final List<Rule> ruleList;
 	private final SecureExpressionHandler secureExpressionHandler;
