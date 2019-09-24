@@ -16,6 +16,8 @@
 
 package com.xkcoding.magic.log.model;
 
+import cn.hutool.core.date.DatePattern;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xkcoding.magic.core.tool.util.IpUtil;
 import com.xkcoding.magic.core.tool.util.UrlUtil;
 import com.xkcoding.magic.core.tool.util.WebUtil;
@@ -23,6 +25,7 @@ import com.xkcoding.magic.log.enums.LogType;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.logging.LogLevel;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -85,6 +88,8 @@ public abstract class AbstractLogModel {
 	/**
 	 * 操作时间
 	 */
+	@DateTimeFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
+	@JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
 	private LocalDateTime operateTime;
 
 	/**

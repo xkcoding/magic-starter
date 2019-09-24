@@ -38,7 +38,7 @@ public class LogProperties {
 	/**
 	 * Web请求日志配置熟悉.
 	 */
-	private RequestLogProperties request;
+	private RequestLogProperties request = new RequestLogProperties();
 
 	/**
 	 * Web请求日志配置熟悉
