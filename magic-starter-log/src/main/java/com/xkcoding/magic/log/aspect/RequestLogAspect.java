@@ -61,7 +61,7 @@ import java.util.concurrent.TimeUnit;
 @Order(MagicConsts.AOP_ORDER_REQUEST_LOG)
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@ConditionalOnProperty(value = "magic.log.request.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = "magic.log.request.enabled", havingValue = "true")
 public class RequestLogAspect {
 
 	private final ObjectMapper objectMapper;
