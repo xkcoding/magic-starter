@@ -13,3 +13,15 @@
 
 一组神奇的 starter 套件，只为爱“偷懒”的你~
 
+## 开发进度
+
+- [x] 自动装配组件模块：magic-core-auto
+- [x] 核心工具包模块：magic-core-tool
+- [x] 依赖版本控制模块：magic-starter-bom
+- [x] 极简的权限控制模块：magic-starter-secure
+- [ ] 通用操作日志封装模块：magic-starter-log
+- [ ] 通用消息通知封装模块：magic-starter-message
+- [ ] 限流组件模块：magic-starter-ratelimiter
+- [ ] 分布式锁模块：magic-starter-locker
+- [ ] 通用对象存储封装模块：magic-starter-oss
+  
