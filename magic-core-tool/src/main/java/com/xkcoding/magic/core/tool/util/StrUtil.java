@@ -14,29 +14,33 @@
  * limitations under the License.
  */
 
-package com.xkcoding.magic.core.tool.constants;
+package com.xkcoding.magic.core.tool.util;
 
 /**
  * <p>
- * Magic Starter 常量池
+ * 对 hutool StrUtil 的扩展
  * </p>
  *
  * @author yangkai.shen
- * @date Created in 2019/9/23 14:26
+ * @date Created in 2019/9/24 14:12
  */
-public interface MagicConsts {
-	/**
-	 * 注解 @Secure AOP顺序
-	 */
-	int AOP_ORDER_SECURE = 0;
+public class StrUtil extends cn.hutool.core.util.StrUtil {
+	public static final String UNKNOWN = "unknown";
+	public static final String UTF_8 = "UTF-8";
+	public static final String GBK = "GBK";
+	public static final String ISO_8859_1 = "ISO-8859-1";
 
 	/**
-	 * 注解 @Log AOP顺序
+	 * 创建StringBuilder对象
+	 *
+	 * @param sb   初始StringBuilder
+	 * @param strs 初始字符串列表
+	 * @return StringBuilder对象
 	 */
-	int AOP_ORDER_LOG = AOP_ORDER_SECURE + 1;
-
-	/**
-	 * web 请求 AOP 顺序
-	 */
-	int AOP_ORDER_REQUEST_LOG = AOP_ORDER_SECURE - 1;
+	public static StringBuilder appendBuilder(StringBuilder sb, CharSequence... strs) {
+		for (CharSequence str : strs) {
+			sb.append(str);
+		}
+		return sb;
+	}
 }
