@@ -11,7 +11,7 @@
 
 ## 简介
 
-`magic-starter-log` 主要是通过对操作日志封装，使用一个注解记录操作日志，使用 spring event 异步处理日志，同时提供 logback 的常用配置。
+`magic-starter-log` 主要是通过对操作日志封装，使用一个注解记录操作日志，使用 spring event 异步处理日志，同时提供 logback 的通用配置文件。
 
 ## 使用
 
@@ -102,6 +102,26 @@ public class LogConfig {
 }
 ```
 
+### logback 配置文件
+
+> 1. 会生成 3 种日志文件，①全量日志，便于排查问题，保存7天，最大100M ②INFO日志 ③ERROR日志
+> 2. 日志文件名字根据 `spring.application.name` 获取
+> 3. 日志文件生成路径根据 `logging.path` 获取
+
+使用方式：
+
+配置 `logging.config` 为 `classpath:com/xkcoding/magic/log/logback/logback-spring.xml` 即可
+
+示例：
+
+```yaml
+spring:
+  application:
+    name: magic-starter-log-demo
+logging:
+  config: classpath:com/xkcoding/magic/log/logback/logback-spring.xml
+```
+
 ## 特点
 
 - 基于 Spring Event 异步操作事件
@@ -109,3 +129,4 @@ public class LogConfig {
 - 自定义日志方便在任意位置记录日志
 - 错误日志可以记录堆栈信息及错误行号等信息
 - 请求/响应日志默认关闭，不影响性能，方便开发时调试
+- 提供通用 logback 配置文件
