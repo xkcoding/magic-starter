@@ -19,7 +19,7 @@
 - [x] 核心工具包模块：magic-core-tool
 - [x] 依赖版本控制模块：magic-starter-bom
 - [x] 极简的权限控制模块：magic-starter-secure
-- [ ] 通用操作日志封装模块：magic-starter-log
+- [x] 通用操作日志封装模块：magic-starter-log
 - [ ] 通用消息通知封装模块：magic-starter-message
 - [ ] 限流组件模块：magic-starter-ratelimiter
 - [ ] 分布式锁模块：magic-starter-locker

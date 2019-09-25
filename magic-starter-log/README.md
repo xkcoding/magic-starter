@@ -13,3 +13,99 @@
 
 `magic-starter-log` 主要是通过对操作日志封装，使用一个注解记录操作日志，使用 spring event 异步处理日志，同时提供 logback 的常用配置。
 
+## 使用
+
+```xml
+<dependency>
+  <groupId>com.xkcoding</groupId>
+  <artifactId>magic-starter-log</artifactId>
+  <version>${magic-starter.version}</version>
+</dependency>
+```
+
+## 快速上手
+
+> magic-starter-log 提供了四种类型的日志方案。
+>
+> 1. 操作日志(`基于注解 + AOP`)
+> 2. 自定义日志(`注入 MagicLogger 发送自定义日志`)
+> 3. 错误日志(`使用 LogEventPublisher.publishErrorLogEvent(exception) 发送异常日志 `)
+> 4. 请求/响应日志(`默认获取返回值是 R 同时是 Controller 或 RestController 的请求/响应日志，默认关闭，可以在配置文件开启`)
+>
+> 懒人请直接看demo：https://github.com/xkcoding/magic-starter-log-demo
+
+### 日志收集
+
+- 操作日志
+
+在方法上添加注解 `@OperateLog` 收集操作日志
+
+- 自定义日志
+
+使用 `@Autowired` 注入 `MagicLogger` 发布自定义日志
+
+- 错误日志
+
+常见做法：① 在全局异常拦截的地方，使用 `LogEventPublisher.publishErrorLogEvent(exception);` 记录错误日志 ② 在 catch 代码块记录错误日志
+
+- 请求/响应日志
+
+在配置文件配置 `magic.log.request.enabled` 为 `true` 开启请求/响应日志
+
+### 日志处理
+
+> 1. 继承 `LogHandler` 实现对应日志类型的方法
+> 2. 注册为 Spring Bean
+
+```java
+/**
+ * <p>
+ * 日志执行逻辑
+ * </p>
+ *
+ * @author yangkai.shen
+ * @date Created in 2019/9/24 19:43
+ */
+@Slf4j
+public class DemoLogHandler implements LogHandler {
+    @Override
+    public void handleOperateLog(OperateLogModel logModel) {
+        log.info("【OperateLogModel】= {}", JSONUtil.toJsonStr(logModel));
+    }
+
+    @Override
+    public void handleCustomLog(CustomLogModel logModel) {
+        log.info("【CustomLogModel】= {}", JSONUtil.toJsonStr(logModel));
+    }
+
+    @Override
+    public void handleErrorLog(ErrorLogModel logModel) {
+        log.info("【ErrorLogModel】= {}", JSONUtil.toJsonStr(logModel));
+    }
+}
+
+
+/**
+ * <p>
+ * 日志配置类
+ * </p>
+ *
+ * @author yangkai.shen
+ * @date Created in 2019/9/24 19:43
+ */
+@Configuration
+public class LogConfig {
+    @Bean
+    public LogHandler logHandler() {
+        return new DemoLogHandler();
+    }
+}
+```
+
+## 特点
+
+- 基于 Spring Event 异步操作事件
+- 基于 Ip2Region 获取对方IP的省市区信息及网络信息(要支持这个功能需要引入 `magic-core-tool` 依赖，同时在将 IP 数据库文件放在 `src/main/resources/ip` 目录下，数据库文件可以从 [这里](https://github.com/xkcoding/magic-starter/tree/master/magic-core-tool/src/main/resources/ip/ip2region.db) 下载)
+- 自定义日志方便在任意位置记录日志
+- 错误日志可以记录堆栈信息及错误行号等信息
+- 请求/响应日志默认关闭，不影响性能，方便开发时调试
