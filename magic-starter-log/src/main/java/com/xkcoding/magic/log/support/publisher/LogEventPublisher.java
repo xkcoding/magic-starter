@@ -16,7 +16,7 @@
 
 package com.xkcoding.magic.log.support.publisher;
 
-import cn.hutool.core.exceptions.ExceptionUtil;
+import com.xkcoding.magic.core.tool.util.ExceptionUtil;
 import com.xkcoding.magic.core.tool.util.SpringUtil;
 import com.xkcoding.magic.core.tool.util.WebUtil;
 import com.xkcoding.magic.log.constants.LogConstants;
