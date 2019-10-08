@@ -46,17 +46,20 @@
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
     </dependency>
+
     <dependency>
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-all</artifactId>
       <version>${hutool.version}</version>
     </dependency>
+
     <!-- ip2region: ip地理位置解析 -->
     <dependency>
       <groupId>org.lionsoul</groupId>
       <artifactId>ip2region</artifactId>
       <version>${ip2region.version}</version>
     </dependency>
+
     <dependency>
       <groupId>com.xkcoding</groupId>
       <artifactId>magic-core-auto</artifactId>
