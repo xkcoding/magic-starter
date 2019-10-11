@@ -34,7 +34,47 @@
     Magic Message 集成多种消息通知，包括钉钉机器人，各类邮件，阿里大鱼，微信
   </description>
 
+  <properties>
+    <aliyun.core.version>4.4.6</aliyun.core.version>
+    <aliyun.dysmsapi.version>1.1.0</aliyun.dysmsapi.version>
+  </properties>
+
   <dependencies>
+    <dependency>
+      <groupId>com.xkcoding</groupId>
+      <artifactId>magic-core-tool</artifactId>
+      <version>${magic-starter.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- 阿里大鱼 -->
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-core</artifactId>
+      <version>${aliyun.core.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+      <version>${aliyun.dysmsapi.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Spring Boot 邮件依赖 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Spring Boot 模板依赖 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
     <dependency>
       <groupId>com.xkcoding</groupId>
       <artifactId>magic-core-auto</artifactId>
