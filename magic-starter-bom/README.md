@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://github.com/xkcoding/magic-starter/magic-starter-bom" target="_blank">magic-starter-bom</a></h1>
+<h1 align="center"><a href="https://github.com/xkcoding/magic-starter/tree/master/magic-starter-bom" target="_blank">magic-starter-bom</a></h1>
 <p align="center">
 <a href="https://travis-ci.com/xkcoding/magic-starter" target="_blank"><img alt="Travis-CI" src="https://travis-ci.com/xkcoding/magic-starter.svg?branch=master"/></a>
   <a href="https://search.maven.org/artifact/com.xkcoding/magic-starter-bom" target="_blank"><img alt="MAVEN" src="https://img.shields.io/maven-central/v/com.xkcoding/magic-starter-bom.svg?color=brightgreen&label=Maven%20Central"></a>
