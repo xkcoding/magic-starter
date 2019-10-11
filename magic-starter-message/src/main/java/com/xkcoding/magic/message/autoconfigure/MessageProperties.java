@@ -63,7 +63,7 @@ public class MessageProperties {
 		 */
 		private String secretKey;
 		/**
-		 * 短信模板配置
+		 * 短信模板配置，key是模版名称，value是模版CODE
 		 */
 		private Map<String, String> channels;
 	}
