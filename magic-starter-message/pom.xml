@@ -47,13 +47,15 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- 阿里大鱼 -->
+    <!-- 阿里云核心包 -->
     <dependency>
       <groupId>com.aliyun</groupId>
       <artifactId>aliyun-java-sdk-core</artifactId>
       <version>${aliyun.core.version}</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- 阿里大鱼 -->
     <dependency>
       <groupId>com.aliyun</groupId>
       <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
