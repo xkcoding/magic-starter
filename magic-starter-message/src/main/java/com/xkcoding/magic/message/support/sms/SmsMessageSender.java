@@ -54,6 +54,8 @@ public class SmsMessageSender extends AbstractMessageSender<SmsMessage> {
 	@Override
 	public void validate(SmsMessage message) {
 		AssertUtil.isBlank(message.getMobile(), "手机号不能为空");
+		int size = StrUtil.splitTrim(message.getMobile(), StrUtil.COMMA).size();
+		AssertUtil.isNotBetween(size, 0, 1000, "手机号数量必须在 0-1000 个之内");
 	}
 
 	/**

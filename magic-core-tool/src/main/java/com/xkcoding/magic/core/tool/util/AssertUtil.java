@@ -64,6 +64,20 @@ public class AssertUtil {
 	}
 
 	/**
+	 * 数值是否在范围内
+	 *
+	 * @param number  待校验数值
+	 * @param start   起始值
+	 * @param end     终止值
+	 * @param message 异常消息
+	 */
+	public static void isNotBetween(int number, int start, int end, String message) {
+		if (number > end || number < start) {
+			throw new ServiceException(message);
+		}
+	}
+
+	/**
 	 * 字符串是否为空
 	 *
 	 * @param str     待校验字符串
