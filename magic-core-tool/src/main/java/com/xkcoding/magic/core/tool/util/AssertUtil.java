@@ -20,6 +20,7 @@ package com.xkcoding.magic.core.tool.util;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.xkcoding.magic.core.tool.enums.CommonResultCode;
 import com.xkcoding.magic.core.tool.exception.ServiceException;
@@ -27,6 +28,7 @@ import com.xkcoding.magic.core.tool.exception.ServiceException;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -71,8 +73,8 @@ public class AssertUtil {
 	 * @param end     终止值
 	 * @param message 异常消息
 	 */
-	public static void isNotBetween(int number, int start, int end, String message) {
-		if (number > end || number < start) {
+	public static void isNotBetween(Number number, Number start, Number end, String message) {
+		if (NumberUtil.sub(number, start).compareTo(BigDecimal.ZERO) < 0 || NumberUtil.sub(number, end).compareTo(BigDecimal.ZERO) > 0) {
 			throw new ServiceException(message);
 		}
 	}
