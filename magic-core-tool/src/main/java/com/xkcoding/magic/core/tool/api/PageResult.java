@@ -16,9 +16,10 @@
 
 package com.xkcoding.magic.core.tool.api;
 
+import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -31,27 +32,57 @@ import java.util.List;
  * @date Created in 2019-07-12 16:23
  */
 @Data
-@NoArgsConstructor
+@Accessors(chain = true)
 @AllArgsConstructor
 public class PageResult<T> {
-    /**
-     * 总记录数
-     */
-    private Long total;
+	/**
+	 * 总记录数
+	 */
+	private Long total;
 
-    /**
-     * 当前页数据
-     */
-    private List<T> list;
+	/**
+	 * 当前页数据
+	 */
+	private List<T> list;
 
-    /**
-     * 构造器
-     *
-     * @param total 总记录数
-     * @param list  当前页数据
-     */
-    public PageResult(int total, List<T> list) {
-        this.total = (long) total;
-        this.list = list;
-    }
+	/**
+	 * 构造器
+	 */
+	public PageResult() {
+		this(0, Lists.newArrayList());
+	}
+
+	/**
+	 * 构造器
+	 *
+	 * @param total 总记录数
+	 * @param list  当前页数据
+	 */
+	public PageResult(int total, List<T> list) {
+		this.total = (long) total;
+		this.list = list;
+	}
+
+	/**
+	 * 构造空对象
+	 *
+	 * @param <T> 泛型
+	 * @return 空的分页对象
+	 */
+	public static <T> PageResult<T> ofEmpty() {
+		return new PageResult<>(0, Lists.newArrayList());
+	}
+
+	/**
+	 * 构造分页对象
+	 *
+	 * @param total 总记录数
+	 * @param list  当前页数据
+	 * @param <T>泛型
+	 * @return 分页对象
+	 */
+	public static <T> PageResult<T> of(int total, List<T> list) {
+		return new PageResult<>(total, list);
+	}
+
 }
