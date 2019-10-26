@@ -22,6 +22,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.xkcoding.magic.core.tool.api.IResultCode;
 import com.xkcoding.magic.core.tool.enums.CommonResultCode;
 import com.xkcoding.magic.core.tool.exception.ServiceException;
 
@@ -55,51 +56,62 @@ public class AssertUtil {
 	 * @param groups 待校验的组
 	 */
 	public static void validateEntity(Object object, Class<?>... groups) {
+		validateEntity(object, CommonResultCode.PARAM_VALID_ERROR, groups);
+	}
+
+	/**
+	 * 校验对象
+	 *
+	 * @param object     待校验对象
+	 * @param resultCode 结果状态码
+	 * @param groups     待校验的组
+	 */
+	public static void validateEntity(Object object, IResultCode resultCode, Class<?>... groups) {
 		Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
 		if (!constraintViolations.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 			for (ConstraintViolation<Object> constraint : constraintViolations) {
 				msg.append(constraint.getMessage()).append("<br>");
 			}
-			throw new ServiceException(CommonResultCode.PARAM_VALID_ERROR, msg.toString());
+			throw new ServiceException(resultCode, msg.toString());
 		}
 	}
 
 	/**
 	 * 数值是否在范围内
 	 *
-	 * @param number  待校验数值
-	 * @param start   起始值
-	 * @param end     终止值
-	 * @param message 异常消息
+	 * @param number     待校验数值
+	 * @param start      起始值
+	 * @param end        终止值
+	 * @param resultCode 结果状态码
 	 */
-	public static void isNotBetween(Number number, Number start, Number end, String message) {
+	public static void isNotBetween(Number number, Number start, Number end, IResultCode resultCode) {
 		if (NumberUtil.sub(number, start).compareTo(BigDecimal.ZERO) < 0 || NumberUtil.sub(number, end).compareTo(BigDecimal.ZERO) > 0) {
-			throw new ServiceException(message);
+			throw new ServiceException(resultCode);
 		}
 	}
 
 	/**
 	 * 字符串是否为空
 	 *
-	 * @param str     待校验字符串
-	 * @param message 异常消息
+	 * @param str        待校验字符串
+	 * @param resultCode 结果状态码
 	 */
-	public static void isBlank(String str, String message) {
+	public static void isBlank(String str, IResultCode resultCode) {
 		if (StrUtil.isBlank(str)) {
-			throw new ServiceException(message);
+			throw new ServiceException(resultCode);
 		}
 	}
 
 	/**
 	 * 对象是否为空
 	 *
-	 * @param object  待校验对象
-	 * @param message 异常消息
+	 * @param object     待校验对象
+	 * @param resultCode 结果状态码
 	 */
-	public static void isNull(Object object, String message) {
+	public static void isNull(Object object, IResultCode resultCode) {
 		if (ObjectUtil.isNull(object)) {
-			throw new ServiceException(message);
+			throw new ServiceException(resultCode);
 		}
 	}
 
@@ -107,23 +119,23 @@ public class AssertUtil {
 	 * 集合是否为空
 	 *
 	 * @param collection 待校验对象
-	 * @param message    异常消息
+	 * @param resultCode 结果状态码
 	 */
-	public static void isEmpty(Collection<?> collection, String message) {
+	public static void isEmpty(Collection<?> collection, IResultCode resultCode) {
 		if (CollUtil.isEmpty(collection)) {
-			throw new ServiceException(message);
+			throw new ServiceException(resultCode);
 		}
 	}
 
 	/**
 	 * map是否为空
 	 *
-	 * @param map     待校验对象
-	 * @param message 异常消息
+	 * @param map        待校验对象
+	 * @param resultCode 结果状态码
 	 */
-	public static void isEmpty(Map<?, ?> map, String message) {
+	public static void isEmpty(Map<?, ?> map, IResultCode resultCode) {
 		if (MapUtil.isEmpty(map)) {
-			throw new ServiceException(message);
+			throw new ServiceException(resultCode);
 		}
 	}
 
@@ -131,11 +143,11 @@ public class AssertUtil {
 	 * 集合是否不为空
 	 *
 	 * @param collection 待校验对象
-	 * @param message    异常消息
+	 * @param resultCode 结果状态码
 	 */
-	public static void isNotEmpty(Collection<?> collection, String message) {
+	public static void isNotEmpty(Collection<?> collection, IResultCode resultCode) {
 		if (CollUtil.isNotEmpty(collection)) {
-			throw new ServiceException(message);
+			throw new ServiceException(resultCode);
 		}
 	}
 }
