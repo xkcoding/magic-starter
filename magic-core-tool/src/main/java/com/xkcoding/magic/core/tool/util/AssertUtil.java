@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (c) 2019-2029, xkcoding & Yangkai.Shen & 沈扬凯 (237497819@qq.com & xkcoding.com).
  * <p>
@@ -92,6 +90,20 @@ public class AssertUtil {
 	}
 
 	/**
+	 * 数值是否在范围内
+	 *
+	 * @param number  待校验数值
+	 * @param start   起始值
+	 * @param end     终止值
+	 * @param message 异常消息
+	 */
+	public static void isNotBetween(Number number, Number start, Number end, String message) {
+		if (NumberUtil.sub(number, start).compareTo(BigDecimal.ZERO) < 0 || NumberUtil.sub(number, end).compareTo(BigDecimal.ZERO) > 0) {
+			throw new ServiceException(message);
+		}
+	}
+
+	/**
 	 * 字符串是否为空
 	 *
 	 * @param str        待校验字符串
@@ -100,6 +112,18 @@ public class AssertUtil {
 	public static void isBlank(String str, IResultCode resultCode) {
 		if (StrUtil.isBlank(str)) {
 			throw new ServiceException(resultCode);
+		}
+	}
+
+	/**
+	 * 字符串是否为空
+	 *
+	 * @param str     待校验字符串
+	 * @param message 异常消息
+	 */
+	public static void isBlank(String str, String message) {
+		if (StrUtil.isBlank(str)) {
+			throw new ServiceException(message);
 		}
 	}
 
@@ -116,6 +140,18 @@ public class AssertUtil {
 	}
 
 	/**
+	 * 对象是否为空
+	 *
+	 * @param object  待校验对象
+	 * @param message 异常消息
+	 */
+	public static void isNull(Object object, String message) {
+		if (ObjectUtil.isNull(object)) {
+			throw new ServiceException(message);
+		}
+	}
+
+	/**
 	 * 集合是否为空
 	 *
 	 * @param collection 待校验对象
@@ -124,6 +160,18 @@ public class AssertUtil {
 	public static void isEmpty(Collection<?> collection, IResultCode resultCode) {
 		if (CollUtil.isEmpty(collection)) {
 			throw new ServiceException(resultCode);
+		}
+	}
+
+	/**
+	 * 集合是否为空
+	 *
+	 * @param collection 待校验对象
+	 * @param message    异常消息
+	 */
+	public static void isEmpty(Collection<?> collection, String message) {
+		if (CollUtil.isEmpty(collection)) {
+			throw new ServiceException(message);
 		}
 	}
 
@@ -140,6 +188,18 @@ public class AssertUtil {
 	}
 
 	/**
+	 * map是否为空
+	 *
+	 * @param map     待校验对象
+	 * @param message 异常消息
+	 */
+	public static void isEmpty(Map<?, ?> map, String message) {
+		if (MapUtil.isEmpty(map)) {
+			throw new ServiceException(message);
+		}
+	}
+
+	/**
 	 * 集合是否不为空
 	 *
 	 * @param collection 待校验对象
@@ -148,6 +208,18 @@ public class AssertUtil {
 	public static void isNotEmpty(Collection<?> collection, IResultCode resultCode) {
 		if (CollUtil.isNotEmpty(collection)) {
 			throw new ServiceException(resultCode);
+		}
+	}
+
+	/**
+	 * 集合是否不为空
+	 *
+	 * @param collection 待校验对象
+	 * @param message    异常消息
+	 */
+	public static void isNotEmpty(Collection<?> collection, String message) {
+		if (CollUtil.isNotEmpty(collection)) {
+			throw new ServiceException(message);
 		}
 	}
 }
