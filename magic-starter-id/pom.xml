@@ -26,6 +26,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>magic-starter-id</artifactId>
+  <name>${project.artifactId}</name>
+  <version>${magic-starter.version}</version>
+  <packaging>jar</packaging>
 
+  <description>
+    Magic Id 分布式主键生成器
+  </description>
 
 </project>
