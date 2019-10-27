@@ -24,6 +24,7 @@
     <module>magic-starter-locker</module>
     <module>magic-starter-ratelimiter</module>
     <module>magic-starter-oss</module>
+    <module>magic-starter-id</module>
   </modules>
 
   <properties>
