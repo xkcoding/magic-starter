@@ -70,6 +70,6 @@ public class SnowflakeIdFactory implements IdFactory {
 	 */
 	@Override
 	public Id getInstance() {
-		return new SnowFlakeId(this.dataCenterId, this.workerId);
+		return new SnowFlakeId(this.dataCenterId, this.workerId, this.prefix);
 	}
 }
