@@ -79,6 +79,11 @@
         <artifactId>magic-starter-oss</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.xkcoding</groupId>
+        <artifactId>magic-starter-id</artifactId>
+        <version>${magic-starter.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
