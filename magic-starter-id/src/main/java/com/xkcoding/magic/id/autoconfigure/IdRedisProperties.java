@@ -16,13 +16,14 @@
 
 package com.xkcoding.magic.id.autoconfigure;
 
+import com.xkcoding.magic.id.autoconfigure.base.BaseIdProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * <p>
- * Redis配置属性
+ * Redis步长ID生成器配置
  * </p>
  *
  * @author yangkai.shen

@@ -16,15 +16,18 @@
 
 package com.xkcoding.magic.id.autoconfigure;
 
+import com.xkcoding.magic.id.autoconfigure.base.BaseIdProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author lengleng
- * @date 2019-05-26
  * <p>
- * Snowflake 发号器属性
+ * 雪花算法ID生成器配置
+ * </p>
+ *
+ * @author yangkai.shen
+ * @date Created in 2019/10/29 17:52
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

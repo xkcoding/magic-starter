@@ -16,20 +16,18 @@
 
 package com.xkcoding.magic.id.autoconfigure;
 
-/**
- * @author lengleng
- * @date 2019-05-26
- */
-
+import com.xkcoding.magic.id.autoconfigure.base.BaseIdProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author lengleng
- * @date 2019/5/26
  * <p>
- * 发号器DB配置属性
+ * 数据库步长ID生成器配置
+ * </p>
+ *
+ * @author yangkai.shen
+ * @date Created in 2019/10/29 17:53
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

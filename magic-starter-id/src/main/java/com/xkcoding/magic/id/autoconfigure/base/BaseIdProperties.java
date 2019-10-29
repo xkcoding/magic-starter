@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xkcoding.magic.id.autoconfigure;
+package com.xkcoding.magic.id.autoconfigure.base;
 
 /**
  * <p>
