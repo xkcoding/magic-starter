@@ -36,7 +36,7 @@ public class RedisRangeManager implements RangeManager {
 	/**
 	 * 前缀防止key重复
 	 */
-	private final static String KEY_PREFIX = "x_sequence_";
+	private final static String KEY_PREFIX = "magic_id_";
 
 	/**
 	 * redis客户端
