@@ -34,4 +34,26 @@
     Magic Id 分布式主键生成器
   </description>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.xkcoding</groupId>
+      <artifactId>magic-core-tool</artifactId>
+      <version>${magic-starter.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.xkcoding</groupId>
+      <artifactId>magic-core-auto</artifactId>
+      <version>${magic-starter.version}</version>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
 </project>
