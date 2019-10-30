@@ -19,6 +19,7 @@ package com.xkcoding.magic.id.support.id.impl;
 import cn.hutool.core.date.SystemClock;
 import cn.hutool.core.util.StrUtil;
 import com.xkcoding.magic.id.exception.IdException;
+import com.xkcoding.magic.id.support.business.BusinessName;
 import com.xkcoding.magic.id.support.id.Id;
 import com.xkcoding.magic.id.support.prefix.Prefix;
 import com.xkcoding.magic.id.support.prefix.impl.DefaultPrefix;
@@ -173,7 +174,19 @@ public class SnowFlakeId implements Id {
 	 * @throws IdException 主键生成异常
 	 */
 	@Override
-	public synchronized long nextId() throws IdException {
+	public long nextId() throws IdException {
+		return nextId(null);
+	}
+
+	/**
+	 * （根据业务名称）生成下一个主键
+	 *
+	 * @param businessName 业务名称
+	 * @return 主键
+	 * @throws IdException 主键生成异常
+	 */
+	@Override
+	public synchronized long nextId(BusinessName businessName) throws IdException {
 		long timestamp = genTime();
 		if (timestamp < lastTimestamp) {
 			// 如果服务器时间有问题(时钟后退) 报错。
@@ -203,6 +216,19 @@ public class SnowFlakeId implements Id {
 	 */
 	@Override
 	public String nextIdStr() throws IdException {
-		return this.prefix.get() + nextId();
+		return nextIdStr(null, this.prefix);
+	}
+
+	/**
+	 * （根据业务名称）生成下一个主键(带格式)
+	 *
+	 * @param businessName 业务名称
+	 * @param prefix       前缀
+	 * @return 主键(带格式)
+	 * @throws IdException 主键生成异常
+	 */
+	@Override
+	public String nextIdStr(BusinessName businessName, Prefix prefix) throws IdException {
+		return prefix.get() + nextId(businessName);
 	}
 }

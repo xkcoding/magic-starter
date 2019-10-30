@@ -47,7 +47,7 @@ public interface RangeId extends Id {
 	/**
 	 * 设置业务名称
 	 *
-	 * @param name 业务名称
+	 * @param businessName 业务名称
 	 */
-	void setBusinessName(BusinessName name);
+	void setBusinessName(BusinessName businessName);
 }

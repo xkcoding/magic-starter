@@ -62,8 +62,19 @@ public class DefaultRangeId implements RangeId {
 
 	@Override
 	public long nextId() throws IdException {
-		String name = businessName.get();
+		return nextId(this.businessName);
+	}
 
+	/**
+	 * （根据业务名称）生成下一个主键
+	 *
+	 * @param businessName 业务名称
+	 * @return 主键
+	 * @throws IdException 主键生成异常
+	 */
+	@Override
+	public long nextId(BusinessName businessName) throws IdException {
+		String name = businessName.get();
 		//当前区间不存在，重新获取一个区间
 		if (null == currentRange) {
 			lock.lock();
@@ -99,7 +110,7 @@ public class DefaultRangeId implements RangeId {
 		}
 
 		if (value < 0) {
-			throw new IdException("Sequence value overflow, value = " + value);
+			throw new IdException("Id value overflow, value = " + value);
 		}
 
 		return value;
@@ -113,7 +124,20 @@ public class DefaultRangeId implements RangeId {
 	 */
 	@Override
 	public String nextIdStr() throws IdException {
-		return String.format("%s%05d", this.prefix.get(), nextId());
+		return nextIdStr(this.businessName, this.prefix);
+	}
+
+	/**
+	 * （根据业务名称）生成下一个主键(带格式)
+	 *
+	 * @param businessName 业务名称
+	 * @param prefix       前缀
+	 * @return 主键(带格式)
+	 * @throws IdException 主键生成异常
+	 */
+	@Override
+	public String nextIdStr(BusinessName businessName, Prefix prefix) throws IdException {
+		return String.format("%s%05d", prefix.get(), nextId(businessName));
 	}
 
 	@Override

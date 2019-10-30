@@ -17,6 +17,8 @@
 package com.xkcoding.magic.id.support.id;
 
 import com.xkcoding.magic.id.exception.IdException;
+import com.xkcoding.magic.id.support.business.BusinessName;
+import com.xkcoding.magic.id.support.prefix.Prefix;
 
 /**
  * <p>
@@ -36,10 +38,29 @@ public interface Id {
 	long nextId() throws IdException;
 
 	/**
+	 * （根据业务名称）生成下一个主键
+	 *
+	 * @param businessName 业务名称
+	 * @return 主键
+	 * @throws IdException 主键生成异常
+	 */
+	long nextId(BusinessName businessName) throws IdException;
+
+	/**
 	 * 生成下一个主键(带格式)
 	 *
 	 * @return 主键(带格式)
 	 * @throws IdException 主键生成异常
 	 */
 	String nextIdStr() throws IdException;
+
+	/**
+	 * （根据业务名称）生成下一个主键(带格式)
+	 *
+	 * @param businessName 业务名称
+	 * @param prefix       前缀
+	 * @return 主键(带格式)
+	 * @throws IdException 主键生成异常
+	 */
+	String nextIdStr(BusinessName businessName, Prefix prefix) throws IdException;
 }
