@@ -24,5 +24,5 @@
 - [ ] 限流组件模块：magic-starter-ratelimiter
 - [ ] 分布式锁模块：magic-starter-locker
 - [ ] 通用对象存储封装模块：magic-starter-oss
-- [ ] 分布式主键生成器模块：magic-starter-id
+- [x] 分布式主键生成器模块：magic-starter-id
   
