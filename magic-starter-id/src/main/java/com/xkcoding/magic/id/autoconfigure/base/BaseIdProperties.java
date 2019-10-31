@@ -16,6 +16,8 @@
 
 package com.xkcoding.magic.id.autoconfigure.base;
 
+import lombok.Data;
+
 /**
  * <p>
  * 配置基类
@@ -24,6 +26,7 @@ package com.xkcoding.magic.id.autoconfigure.base;
  * @author yangkai.shen
  * @date Created in 2019/10/29 17:34
  */
+@Data
 public class BaseIdProperties {
 	/**
 	 * 获取range步长[可选，默认：1000]
