@@ -34,7 +34,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties({IdDbProperties.class, IdRedisProperties.class, IdSnowflakeProperties.class})
-@ConditionalOnMissingBean(Id.class)
 public class IdAutoConfiguration {
 
 	/**
@@ -42,6 +41,7 @@ public class IdAutoConfiguration {
 	 */
 	@Bean
 	@ConditionalOnBean(IdSnowflakeProperties.class)
+	@ConditionalOnMissingBean(Id.class)
 	public Id snowflakeId(IdSnowflakeProperties properties) {
 		return SnowflakeIdFactory.create().dataCenterId(properties.getDataCenterId()).workerId(properties.getWorkerId()).getInstance();
 	}
