@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.xkcoding</groupId>
+  <groupId>com.xkcoding.magic</groupId>
   <artifactId>Magic-Starter</artifactId>
   <name>${project.artifactId}</name>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <url>https://github.com/xkcoding/justauth-spring-boot-starter</url>
+  <url>https://github.com/xkcoding/magic-starter</url>
   <description>
     一套神奇的starter，只为爱“偷懒”的你~
   </description>
@@ -260,6 +260,35 @@
           <name>xkcoding Nexus Snapshot Repository</name>
           <url>https://nexus.xkcoding.com/repository/maven-snapshots/</url>
         </snapshotRepository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>github</id>
+      <build>
+        <plugins>
+          <!-- GPG -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <distributionManagement>
+        <!-- 发布到GitHub仓库 -->
+        <repository>
+          <id>github-xkcoding</id>
+          <name>xkcoding</name>
+          <url>https://maven.pkg.github.com/xkcoding/magic-starter</url>
+        </repository>
       </distributionManagement>
     </profile>
   </profiles>

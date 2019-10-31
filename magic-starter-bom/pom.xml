@@ -20,7 +20,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>Magic-Starter</artifactId>
-    <groupId>com.xkcoding</groupId>
+    <groupId>com.xkcoding.magic</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -40,47 +40,47 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-core-auto</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-core-tool</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-starter-secure</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-starter-message</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-starter-log</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-starter-locker</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-starter-ratelimiter</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-starter-oss</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.xkcoding</groupId>
+        <groupId>com.xkcoding.magic</groupId>
         <artifactId>magic-starter-id</artifactId>
         <version>${magic-starter.version}</version>
       </dependency>
