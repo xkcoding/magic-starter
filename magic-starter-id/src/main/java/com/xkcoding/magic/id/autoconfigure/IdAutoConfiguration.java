@@ -18,7 +18,6 @@ package com.xkcoding.magic.id.autoconfigure;
 
 import com.xkcoding.magic.id.support.factory.impl.SnowflakeIdFactory;
 import com.xkcoding.magic.id.support.id.Id;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -33,17 +32,16 @@ import org.springframework.context.annotation.Configuration;
  * @date Created in 2019/10/29 15:42
  */
 @Configuration
-@EnableConfigurationProperties({IdDbProperties.class, IdRedisProperties.class, IdSnowflakeProperties.class})
+@EnableConfigurationProperties({IdSnowflakeProperties.class, IdDatabaseProperties.class, IdRedisProperties.class})
 public class IdAutoConfiguration {
 
 	/**
 	 * 默认使用雪花算法实现
 	 */
 	@Bean
-	@ConditionalOnBean(IdSnowflakeProperties.class)
-	@ConditionalOnMissingBean(Id.class)
+	@ConditionalOnMissingBean
 	public Id snowflakeId(IdSnowflakeProperties properties) {
-		return SnowflakeIdFactory.create().dataCenterId(properties.getDataCenterId()).workerId(properties.getWorkerId()).getInstance();
+		return SnowflakeIdFactory.create().dataCenterId(properties.getDataCenterId()).workerId(properties.getWorkerId()).prefix(properties::getPrefix).getInstance();
 	}
 
 }

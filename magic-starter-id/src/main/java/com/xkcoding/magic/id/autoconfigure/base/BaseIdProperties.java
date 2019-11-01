@@ -29,17 +29,7 @@ import lombok.Data;
 @Data
 public class BaseIdProperties {
 	/**
-	 * 获取range步长[可选，默认：1000]
+	 * 前缀
 	 */
-	private int step = 1000;
-
-	/**
-	 * 序列号分配起始值[可选：默认：0]
-	 */
-	private long stepStart = 0;
-
-	/**
-	 * 业务名称
-	 */
-	private String businessName = "magic-id";
+	private String prefix = "";
 }
