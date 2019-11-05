@@ -16,8 +16,6 @@
 
 package com.xkcoding.magic.core.tool.api;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.github.pagehelper.Page;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -102,28 +100,6 @@ public class PageResult<T> {
 	 */
 	public static <T> PageResult<T> of(Number total, List<T> list) {
 		return new PageResult<>(total.longValue(), list);
-	}
-
-	/**
-	 * 构造分页对象
-	 *
-	 * @param pageData 当前页数据
-	 * @param <T>泛型
-	 * @return 分页对象
-	 */
-	public static <T> PageResult<T> of(Page<T> pageData) {
-		return new PageResult<>(pageData.getPageNum(), pageData.getPageSize(), pageData.getPages(), pageData.getTotal(), pageData.getResult());
-	}
-
-	/**
-	 * 构造分页对象
-	 *
-	 * @param pageData 当前页数据
-	 * @param <T>泛型
-	 * @return 分页对象
-	 */
-	public static <T> PageResult<T> of(IPage<T> pageData) {
-		return new PageResult<>((int) pageData.getCurrent(), (int) pageData.getSize(), (int) pageData.getPages(), pageData.getTotal(), pageData.getRecords());
 	}
 
 }
