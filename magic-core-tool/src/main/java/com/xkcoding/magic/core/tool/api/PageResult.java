@@ -16,9 +16,12 @@
 
 package com.xkcoding.magic.core.tool.api;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.pagehelper.Page;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -33,17 +36,33 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class PageResult<T> {
 	/**
+	 * 当前页码
+	 */
+	private Integer currentPage;
+
+	/**
+	 * 每页条数
+	 */
+	private Integer pageSize;
+
+	/**
+	 * 总页数
+	 */
+	private Integer totalPage;
+
+	/**
 	 * 总记录数
 	 */
-	private Long total;
+	private final Long total;
 
 	/**
 	 * 当前页数据
 	 */
-	private List<T> list;
+	private final List<T> list;
 
 	/**
 	 * 构造器
@@ -83,6 +102,28 @@ public class PageResult<T> {
 	 */
 	public static <T> PageResult<T> of(Number total, List<T> list) {
 		return new PageResult<>(total.longValue(), list);
+	}
+
+	/**
+	 * 构造分页对象
+	 *
+	 * @param pageData 当前页数据
+	 * @param <T>泛型
+	 * @return 分页对象
+	 */
+	public static <T> PageResult<T> of(Page<T> pageData) {
+		return new PageResult<>(pageData.getPageNum(), pageData.getPageSize(), pageData.getPages(), pageData.getTotal(), pageData.getResult());
+	}
+
+	/**
+	 * 构造分页对象
+	 *
+	 * @param pageData 当前页数据
+	 * @param <T>泛型
+	 * @return 分页对象
+	 */
+	public static <T> PageResult<T> of(IPage<T> pageData) {
+		return new PageResult<>((int) pageData.getCurrent(), (int) pageData.getSize(), (int) pageData.getPages(), pageData.getTotal(), pageData.getRecords());
 	}
 
 }
