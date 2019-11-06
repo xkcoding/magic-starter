@@ -65,12 +65,15 @@ public class DatabaseRangeManager implements RangeManager {
 
 		Long oldValue;
 		long newValue;
-
-		for (int i = 0; i < getRetryTimes(); i++) {
+		int times = getRetryTimes();
+		for (int i = 0; i < times; i++) {
 			oldValue = BaseDbHelper.selectRange(getDataSource(), getRealTableName(), name, getStepStart());
 
 			if (null == oldValue) {
-				//区间不存在，重试
+				//步长区间不存在，重试次数加 1，重新获取步长区间
+				if (i == 0) {
+					times++;
+				}
 				continue;
 			}
 
