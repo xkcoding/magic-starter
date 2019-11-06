@@ -22,7 +22,6 @@ import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.xkcoding.magic.core.tool.api.IResultCode;
 import com.xkcoding.magic.core.tool.enums.CommonResultCode;
-import com.xkcoding.magic.core.tool.exception.ServiceException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -31,6 +30,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -45,6 +45,20 @@ public class AssertUtil {
 
 	static {
 		validator = Validation.buildDefaultValidatorFactory().getValidator();
+	}
+
+	/**
+	 * 自定义校验
+	 * {@code true}，触发异常
+	 * {@code false}，无操作
+	 *
+	 * @param predicate  自定义函数
+	 * @param resultCode 结果状态码
+	 */
+	public static <T> void validate(T t, Predicate<T> predicate, IResultCode resultCode) {
+		if (predicate.test(t)) {
+			ExceptionUtil.exception(resultCode);
+		}
 	}
 
 	/**
@@ -71,7 +85,7 @@ public class AssertUtil {
 			for (ConstraintViolation<Object> constraint : constraintViolations) {
 				msg.append(constraint.getMessage()).append("<br>");
 			}
-			throw new ServiceException(resultCode, msg.toString());
+			ExceptionUtil.exception(resultCode, msg.toString());
 		}
 	}
 
@@ -85,7 +99,7 @@ public class AssertUtil {
 	 */
 	public static void isNotBetween(Number number, Number start, Number end, IResultCode resultCode) {
 		if (NumberUtil.sub(number, start).compareTo(BigDecimal.ZERO) < 0 || NumberUtil.sub(number, end).compareTo(BigDecimal.ZERO) > 0) {
-			throw new ServiceException(resultCode);
+			ExceptionUtil.exception(resultCode);
 		}
 	}
 
@@ -99,7 +113,7 @@ public class AssertUtil {
 	 */
 	public static void isNotBetween(Number number, Number start, Number end, String message) {
 		if (NumberUtil.sub(number, start).compareTo(BigDecimal.ZERO) < 0 || NumberUtil.sub(number, end).compareTo(BigDecimal.ZERO) > 0) {
-			throw new ServiceException(message);
+			ExceptionUtil.exception(message);
 		}
 	}
 
@@ -111,7 +125,7 @@ public class AssertUtil {
 	 */
 	public static void isBlank(String str, IResultCode resultCode) {
 		if (StrUtil.isBlank(str)) {
-			throw new ServiceException(resultCode);
+			ExceptionUtil.exception(resultCode);
 		}
 	}
 
@@ -123,7 +137,7 @@ public class AssertUtil {
 	 */
 	public static void isBlank(String str, String message) {
 		if (StrUtil.isBlank(str)) {
-			throw new ServiceException(message);
+			ExceptionUtil.exception(message);
 		}
 	}
 
@@ -135,7 +149,7 @@ public class AssertUtil {
 	 */
 	public static void isNull(Object object, IResultCode resultCode) {
 		if (ObjectUtil.isNull(object)) {
-			throw new ServiceException(resultCode);
+			ExceptionUtil.exception(resultCode);
 		}
 	}
 
@@ -147,7 +161,7 @@ public class AssertUtil {
 	 */
 	public static void isNull(Object object, String message) {
 		if (ObjectUtil.isNull(object)) {
-			throw new ServiceException(message);
+			ExceptionUtil.exception(message);
 		}
 	}
 
@@ -159,7 +173,7 @@ public class AssertUtil {
 	 */
 	public static void isEmpty(Collection<?> collection, IResultCode resultCode) {
 		if (CollUtil.isEmpty(collection)) {
-			throw new ServiceException(resultCode);
+			ExceptionUtil.exception(resultCode);
 		}
 	}
 
@@ -171,7 +185,7 @@ public class AssertUtil {
 	 */
 	public static void isEmpty(Collection<?> collection, String message) {
 		if (CollUtil.isEmpty(collection)) {
-			throw new ServiceException(message);
+			ExceptionUtil.exception(message);
 		}
 	}
 
@@ -183,7 +197,7 @@ public class AssertUtil {
 	 */
 	public static void isEmpty(Map<?, ?> map, IResultCode resultCode) {
 		if (MapUtil.isEmpty(map)) {
-			throw new ServiceException(resultCode);
+			ExceptionUtil.exception(resultCode);
 		}
 	}
 
@@ -195,7 +209,7 @@ public class AssertUtil {
 	 */
 	public static void isEmpty(Map<?, ?> map, String message) {
 		if (MapUtil.isEmpty(map)) {
-			throw new ServiceException(message);
+			ExceptionUtil.exception(message);
 		}
 	}
 
@@ -207,7 +221,7 @@ public class AssertUtil {
 	 */
 	public static void isNotEmpty(Collection<?> collection, IResultCode resultCode) {
 		if (CollUtil.isNotEmpty(collection)) {
-			throw new ServiceException(resultCode);
+			ExceptionUtil.exception(resultCode);
 		}
 	}
 
@@ -219,7 +233,7 @@ public class AssertUtil {
 	 */
 	public static void isNotEmpty(Collection<?> collection, String message) {
 		if (CollUtil.isNotEmpty(collection)) {
-			throw new ServiceException(message);
+			ExceptionUtil.exception(message);
 		}
 	}
 }
