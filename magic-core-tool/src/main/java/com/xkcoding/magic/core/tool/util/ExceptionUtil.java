@@ -16,6 +16,8 @@
 
 package com.xkcoding.magic.core.tool.util;
 
+import com.xkcoding.magic.core.tool.api.IResultCode;
+import com.xkcoding.magic.core.tool.exception.ServiceException;
 import com.xkcoding.magic.core.tool.support.lang.FastStringWriter;
 
 import java.io.PrintWriter;
@@ -31,6 +33,34 @@ import java.lang.reflect.UndeclaredThrowableException;
  * @date Created in 2019/9/26 15:49
  */
 public class ExceptionUtil extends cn.hutool.core.exceptions.ExceptionUtil {
+	/**
+	 * 抛出异常
+	 *
+	 * @param resultCode 异常结果码
+	 */
+	public static void exception(IResultCode resultCode) {
+		throw new ServiceException(resultCode);
+	}
+
+	/**
+	 * 抛出异常
+	 *
+	 * @param message 异常消息
+	 */
+	public static void exception(String message) {
+		throw new ServiceException(message);
+	}
+
+	/**
+	 * 抛出异常
+	 *
+	 * @param resultCode 异常结果码
+	 * @param data       异常数据
+	 */
+	public static void exception(IResultCode resultCode, Object data) {
+		throw new ServiceException(resultCode, data);
+	}
+
 	/**
 	 * 将CheckedException转换为UncheckedException.
 	 *
