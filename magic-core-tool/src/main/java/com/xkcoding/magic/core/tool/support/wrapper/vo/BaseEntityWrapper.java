@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xkcoding.magic.core.tool.support;
+package com.xkcoding.magic.core.tool.support.wrapper.vo;
 
 import com.xkcoding.magic.core.tool.api.PageResult;
 

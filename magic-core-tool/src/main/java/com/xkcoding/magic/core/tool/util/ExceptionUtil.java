@@ -16,7 +16,7 @@
 
 package com.xkcoding.magic.core.tool.util;
 
-import com.xkcoding.magic.core.tool.support.FastStringWriter;
+import com.xkcoding.magic.core.tool.support.lang.FastStringWriter;
 
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;

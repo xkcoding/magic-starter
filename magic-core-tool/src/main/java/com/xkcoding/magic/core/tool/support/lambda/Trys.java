@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xkcoding.magic.core.tool.support;
+package com.xkcoding.magic.core.tool.support.lambda;
 
 import com.xkcoding.magic.core.tool.util.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
