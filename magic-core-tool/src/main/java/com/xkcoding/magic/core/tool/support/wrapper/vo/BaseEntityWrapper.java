@@ -56,6 +56,6 @@ public abstract class BaseEntityWrapper<E, V> {
 	 */
 	public PageResult<V> pageVO(PageResult<E> pageResult) {
 		List<V> records = listVO(pageResult.getList());
-		return PageResult.of(pageResult.getTotal(), records);
+		return new PageResult<>(pageResult.getCurrentPage(), pageResult.getPageSize(), pageResult.getTotalPage(), pageResult.getTotal(), records);
 	}
 }
