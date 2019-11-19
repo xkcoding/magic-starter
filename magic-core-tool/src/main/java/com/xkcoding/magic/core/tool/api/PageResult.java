@@ -16,6 +16,7 @@
 
 package com.xkcoding.magic.core.tool.api;
 
+import cn.hutool.core.util.PageUtil;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -81,6 +82,37 @@ public class PageResult<T> {
 	}
 
 	/**
+	 * 构造器
+	 *
+	 * @param currentPage 当前页
+	 * @param pageSize    每页条数
+	 * @param total       总记录数
+	 * @param list        当前页数据
+	 */
+	public PageResult(int currentPage, int pageSize, int total, List<T> list) {
+		this.currentPage = currentPage;
+		this.pageSize = pageSize;
+		this.total = (long) total;
+		this.list = list;
+		this.totalPage = PageUtil.totalPage(total, pageSize);
+	}
+
+	/**
+	 * 构造器
+	 *
+	 * @param query 查询参数
+	 * @param total 总记录数
+	 * @param list  当前页数据
+	 */
+	public <Q extends PageQuery> PageResult(Q query, int total, List<T> list) {
+		this.currentPage = query.getCurrentPage();
+		this.pageSize = query.getPageSize();
+		this.total = (long) total;
+		this.list = list;
+		this.totalPage = PageUtil.totalPage(total, pageSize);
+	}
+
+	/**
 	 * 构造空对象
 	 *
 	 * @param <T> 泛型
@@ -91,15 +123,29 @@ public class PageResult<T> {
 	}
 
 	/**
+	 * 构造空对象
+	 *
+	 * @param query 查询参数
+	 * @param <Q>   泛型
+	 * @param <T>   泛型
+	 * @return 空的分页对象
+	 */
+	public static <Q extends PageQuery, T> PageResult<T> ofEmpty(Q query) {
+		return new PageResult<>(query.getCurrentPage(), query.getPageSize(), 0, 0L, Lists.newArrayList());
+	}
+
+	/**
 	 * 构造分页对象
 	 *
+	 * @param query 查询参数
 	 * @param total 总记录数
 	 * @param list  当前页数据
-	 * @param <T>泛型
+	 * @param <Q>   泛型
+	 * @param <T>   泛型
 	 * @return 分页对象
 	 */
-	public static <T> PageResult<T> of(Number total, List<T> list) {
-		return new PageResult<>(total.longValue(), list);
+	public static <Q extends PageQuery, T> PageResult<T> of(Q query, Number total, List<T> list) {
+		return new PageResult<>(query.getCurrentPage(), query.getPageSize(), PageUtil.totalPage(total.intValue(), query.getPageSize()), total.longValue(), list);
 	}
 
 }
