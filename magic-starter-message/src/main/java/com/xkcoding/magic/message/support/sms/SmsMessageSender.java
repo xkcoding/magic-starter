@@ -52,7 +52,7 @@ public class SmsMessageSender extends AbstractMessageSender<SmsMessage> {
 	 * @param message 消息实体
 	 */
 	@Override
-	public void validate(SmsMessage message) {
+	protected void validate(SmsMessage message) {
 		AssertUtil.isBlank(message.getMobile(), "手机号不能为空");
 		int size = StrUtil.splitTrim(message.getMobile(), StrUtil.COMMA).size();
 		AssertUtil.isNotBetween(size, 0, 1000, "手机号数量必须在 0-1000 个之内");
@@ -65,7 +65,7 @@ public class SmsMessageSender extends AbstractMessageSender<SmsMessage> {
 	 * @return boolean
 	 */
 	@Override
-	public boolean process(SmsMessage message) {
+	protected boolean process(SmsMessage message) {
 		//可自助调整超时时间
 		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
 		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -112,7 +112,7 @@ public class SmsMessageSender extends AbstractMessageSender<SmsMessage> {
 	 * @param message 消息实体
 	 */
 	@Override
-	public void fail(SmsMessage message) {
+	protected void fail(SmsMessage message) {
 		log.error("短信发送失败，当前短信签名：{}，当前短信模板：{}，当前手机号：{}", message.getSignName(), message.getTemplateCode(), message.getMobile());
 	}
 }

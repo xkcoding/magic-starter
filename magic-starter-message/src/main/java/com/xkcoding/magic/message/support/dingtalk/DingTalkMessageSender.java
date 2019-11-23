@@ -45,7 +45,7 @@ public class DingTalkMessageSender extends AbstractMessageSender<AbstractDingTal
 	 * @param message 消息实体
 	 */
 	@Override
-	public void validate(AbstractDingTalkMessage message) {
+	protected void validate(AbstractDingTalkMessage message) {
 		String webhook = messageProperties.getDingtalk().getWebhook();
 		AssertUtil.isBlank(webhook, "钉钉配置错误，webhook为空");
 	}
@@ -57,7 +57,7 @@ public class DingTalkMessageSender extends AbstractMessageSender<AbstractDingTal
 	 * @return boolean
 	 */
 	@Override
-	public boolean process(AbstractDingTalkMessage message) {
+	protected boolean process(AbstractDingTalkMessage message) {
 		String webhook = messageProperties.getDingtalk().getWebhook();
 		try {
 			String result = HttpUtil.post(webhook, JSONUtil.toJsonPrettyStr(message), MessageConstants.DINGTALK_DEFAULT_TIMEOUT);
@@ -75,7 +75,7 @@ public class DingTalkMessageSender extends AbstractMessageSender<AbstractDingTal
 	 * @param message 消息实体
 	 */
 	@Override
-	public void fail(AbstractDingTalkMessage message) {
+	protected void fail(AbstractDingTalkMessage message) {
 		// do nothing
 	}
 }

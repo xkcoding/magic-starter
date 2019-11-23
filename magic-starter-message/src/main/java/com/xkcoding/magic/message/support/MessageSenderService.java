@@ -33,26 +33,4 @@ public interface MessageSenderService<T extends Message> {
 	 * @param message 消息实体
 	 */
 	void send(T message);
-
-	/**
-	 * 数据校验
-	 *
-	 * @param message 消息实体
-	 */
-	void validate(T message);
-
-	/**
-	 * 业务处理
-	 *
-	 * @param message 消息实体
-	 * @return boolean
-	 */
-	boolean process(T message);
-
-	/**
-	 * 失败处理
-	 *
-	 * @param message 消息实体
-	 */
-	void fail(T message);
 }

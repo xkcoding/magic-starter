@@ -45,8 +45,7 @@ public abstract class AbstractMessageSender<T extends Message> implements Messag
 	 *
 	 * @param message 消息实体
 	 */
-	@Override
-	public abstract void validate(T message);
+	protected abstract void validate(T message);
 
 	/**
 	 * 业务处理
@@ -54,14 +53,12 @@ public abstract class AbstractMessageSender<T extends Message> implements Messag
 	 * @param message 消息实体
 	 * @return boolean
 	 */
-	@Override
-	public abstract boolean process(T message);
+	protected abstract boolean process(T message);
 
 	/**
 	 * 失败处理
 	 *
 	 * @param message 消息实体
 	 */
-	@Override
-	public abstract void fail(T message);
+	protected abstract void fail(T message);
 }

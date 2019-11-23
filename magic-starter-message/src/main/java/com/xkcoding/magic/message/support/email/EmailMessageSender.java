@@ -60,7 +60,7 @@ public class EmailMessageSender extends AbstractMessageSender<EmailMessage> {
 	 * @param message 消息实体
 	 */
 	@Override
-	public void validate(EmailMessage message) {
+	protected void validate(EmailMessage message) {
 		if (ObjectUtil.equal(message.getEmailType(), EmailType.SIMPLE)) {
 			AssertUtil.isNotEmpty(message.getAttachments(), "简单邮件不支持附件，请更换复杂邮件类型");
 			AssertUtil.isNotEmpty(message.getStaticResources(), "简单邮件不支持静态资源，请更换复杂邮件类型");
@@ -74,7 +74,7 @@ public class EmailMessageSender extends AbstractMessageSender<EmailMessage> {
 	 * @return boolean
 	 */
 	@Override
-	public boolean process(EmailMessage message) {
+	protected boolean process(EmailMessage message) {
 		switch (message.getEmailType()) {
 			case SIMPLE:
 				return processSimpleEmail(message);
@@ -173,7 +173,7 @@ public class EmailMessageSender extends AbstractMessageSender<EmailMessage> {
 	 * @param message 消息实体
 	 */
 	@Override
-	public void fail(EmailMessage message) {
+	protected void fail(EmailMessage message) {
 		log.error("邮件发送失败，当前邮件类型：{}，当前收件人列表：{}", message.getEmailType(), JSONUtil.toJsonStr(message.getTos()));
 	}
 }
