@@ -67,7 +67,7 @@ public class SecureCheckUtil {
 	 * @return 上下文
 	 */
 	public static StandardEvaluationContext getEvaluationContext(SecureExpressionHandler secureExpressionHandler, Method method, Object[] args) {
-		// 初始化Sp el表达式上下文，并设置 处理函数
+		// 初始化Spel表达式上下文，并设置 处理函数
 		StandardEvaluationContext context = new StandardEvaluationContext(secureExpressionHandler);
 		// 设置表达式支持spring bean
 		context.setBeanResolver(new BeanFactoryResolver(SpringUtil.getContext()));
