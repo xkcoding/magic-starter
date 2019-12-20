@@ -17,8 +17,10 @@
 package com.xkcoding.magic.log.model;
 
 import com.xkcoding.magic.log.enums.LogType;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.boot.logging.LogLevel;
 
 /**
@@ -29,7 +31,9 @@ import org.springframework.boot.logging.LogLevel;
  * @author yangkai.shen
  * @date Created in 2019/9/24 15:01
  */
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class CustomLogModel extends AbstractLogModel {
 	public CustomLogModel(LogLevel level) {
