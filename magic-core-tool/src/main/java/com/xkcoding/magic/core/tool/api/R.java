@@ -18,6 +18,8 @@ package com.xkcoding.magic.core.tool.api;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.xkcoding.magic.core.tool.enums.CommonResultCode;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,24 +40,29 @@ import java.util.Optional;
 @Setter
 @ToString
 @NoArgsConstructor
+@ApiModel(description = "返回信息")
 public class R<T> implements Serializable {
 	private static final long serialVersionUID = 6326871050523704540L;
 
 	/**
 	 * 状态码
 	 */
+	@ApiModelProperty(value = "状态码", required = true)
 	private int code;
 	/**
 	 * 是否成功
 	 */
+	@ApiModelProperty(value = "是否成功", required = true)
 	private boolean success;
 	/**
 	 * 返回消息
 	 */
+	@ApiModelProperty(value = "返回消息", required = true)
 	private String msg;
 	/**
 	 * 承载数据
 	 */
+	@ApiModelProperty(value = "承载数据")
 	private T data;
 
 	private R(IResultCode resultCode) {
@@ -91,7 +98,9 @@ public class R<T> implements Serializable {
 	 * @return 是否成功
 	 */
 	public static boolean isSuccess(R<?> result) {
-		return Optional.ofNullable(result).map(x -> ObjectUtil.equal(CommonResultCode.SUCCESS.getCode(), x.code)).orElse(Boolean.FALSE);
+		return Optional.ofNullable(result)
+			.map(x -> ObjectUtil.equal(CommonResultCode.SUCCESS.getCode(), x.code))
+			.orElse(Boolean.FALSE);
 	}
 
 	/**
@@ -112,7 +121,10 @@ public class R<T> implements Serializable {
 	 * @return 泛型对象
 	 */
 	public static <T> T getData(R<T> result) {
-		return Optional.ofNullable(result).filter(r -> r.success).map(x -> x.getData()).orElse(null);
+		return Optional.ofNullable(result)
+			.filter(r -> r.success)
+			.map(x -> x.getData())
+			.orElse(null);
 	}
 
 	/**

@@ -18,11 +18,14 @@ package com.xkcoding.magic.core.tool.api;
 
 import cn.hutool.core.util.PageUtil;
 import com.google.common.collect.Lists;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -35,32 +38,36 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@RequiredArgsConstructor
 @AllArgsConstructor
-public class PageResult<T> {
+@RequiredArgsConstructor
+@ApiModel(description = "分页信息")
+public class PageResult<T> implements Serializable {
+	private static final long serialVersionUID = -7972346802746726513L;
+
 	/**
 	 * 当前页码
 	 */
+	@ApiModelProperty(value = "当前页码", required = true)
 	private Integer currentPage;
-
 	/**
 	 * 每页条数
 	 */
+	@ApiModelProperty(value = "每页条数", required = true)
 	private Integer pageSize;
-
 	/**
 	 * 总页数
 	 */
+	@ApiModelProperty(value = "总页数", required = true)
 	private Integer totalPage;
-
 	/**
 	 * 总记录数
 	 */
+	@ApiModelProperty(value = "总记录数", required = true)
 	private final Long total;
-
 	/**
 	 * 当前页数据
 	 */
+	@ApiModelProperty(value = "当前页数据")
 	private final List<T> list;
 
 	/**

@@ -17,6 +17,8 @@
 package com.xkcoding.magic.core.tool.api;
 
 import com.xkcoding.magic.core.tool.enums.SortType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,26 +34,28 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "分页参数")
 public class PageQuery {
 	/**
 	 * 当前页码
 	 */
+	@ApiModelProperty(value = "当前页码", required = true)
 	private Integer currentPage;
-
 	/**
 	 * 每页条数
 	 */
+	@ApiModelProperty(value = "每页条数", required = true)
 	private Integer pageSize;
-
 	/**
 	 * 排序字段
 	 */
+	@ApiModelProperty(value = "排序字段")
 	private String sortBy;
-
 	/**
 	 * 排序方式
 	 *
 	 * @see SortType
 	 */
+	@ApiModelProperty(value = "排序方式")
 	private SortType sortType;
 }

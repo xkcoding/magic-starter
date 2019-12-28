@@ -40,6 +40,8 @@
     <ip2region.version>1.7.2</ip2region.version>
     <pagehelper.version>5.1.10</pagehelper.version>
     <mybatis.plus.version>3.2.0</mybatis.plus.version>
+    <swagger.version>2.9.2</swagger.version>
+    <swagger.models.version>1.5.21</swagger.models.version>
   </properties>
 
   <dependencies>
@@ -53,6 +55,24 @@
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-all</artifactId>
       <version>${hutool.version}</version>
+    </dependency>
+
+    <!--Swagger-->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>${swagger.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>io.swagger</groupId>
+          <artifactId>swagger-models</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-models</artifactId>
+      <version>${swagger.models.version}</version>
     </dependency>
 
     <!-- ip2region: ip地理位置解析 -->
