@@ -14,33 +14,20 @@
  * limitations under the License.
  */
 
-package com.xkcoding.magic.core.tool.constants;
+package com.xkcoding.magic.oss.autoconfigure;
+
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * <p>
- * Magic Starter 常量池
+ * 对象存储自动装配
  * </p>
  *
  * @author yangkai.shen
- * @date Created in 2019/9/23 14:26
+ * @date Created in 2019/12/30 16:49
  */
-public interface MagicConsts {
-	/**
-	 * 项目名称常量
-	 */
-	String MAGIC = "magic";
-	/**
-	 * 注解 @Secure AOP顺序
-	 */
-	int AOP_ORDER_SECURE = 0;
-
-	/**
-	 * 注解 @Log AOP顺序
-	 */
-	int AOP_ORDER_LOG = AOP_ORDER_SECURE + 1;
-
-	/**
-	 * web 请求 AOP 顺序
-	 */
-	int AOP_ORDER_REQUEST_LOG = AOP_ORDER_SECURE - 1;
+@Configuration
+@EnableConfigurationProperties({OssProperties.class})
+public class OssAutoConfiguration {
 }

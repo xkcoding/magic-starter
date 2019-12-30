@@ -42,6 +42,13 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.xkcoding.magic</groupId>
+      <artifactId>magic-core-tool</artifactId>
+      <version>${magic-starter.version}</version>
+      <optional>true</optional>
+    </dependency>
+
     <!-- OSS -->
     <dependency>
       <groupId>com.aliyun.oss</groupId>
