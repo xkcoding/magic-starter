@@ -16,7 +16,10 @@
 
 package com.xkcoding.magic.oss.autoconfigure;
 
+import com.xkcoding.magic.oss.support.rule.OssRule;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -30,4 +33,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties({OssProperties.class})
 public class OssAutoConfiguration {
+	@Bean
+	@ConditionalOnMissingBean
+	public OssRule ossRule() {
+		return new OssRule() {
+		};
+	}
 }
