@@ -16,13 +16,29 @@
 
 package com.xkcoding.magic.oss.support.ali;
 
+import cn.hutool.json.JSONUtil;
+import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.common.utils.BinaryUtil;
+import com.aliyun.oss.model.MatchMode;
+import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.PolicyConditions;
+import com.aliyun.oss.model.PutObjectResult;
+import com.xkcoding.magic.core.tool.util.StrUtil;
 import com.xkcoding.magic.oss.OssTemplate;
+import com.xkcoding.magic.oss.autoconfigure.OssProperties;
 import com.xkcoding.magic.oss.model.OssFile;
 import com.xkcoding.magic.oss.model.OssFileMetaInfo;
+import com.xkcoding.magic.oss.support.rule.OssRule;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,7 +48,42 @@ import java.util.List;
  * @author yangkai.shen
  * @date Created in 2019/12/31 17:19
  */
+@RequiredArgsConstructor
 public class AliOssTemplate implements OssTemplate {
+	private final OSSClient ossClient;
+	private final OssProperties ossProperties;
+	private final OssRule ossRule;
+
+	/**
+	 * 根据配置文件获取存储桶名称
+	 *
+	 * @return 存储桶名称
+	 */
+	private String getBucketName() {
+		return getBucketName(ossProperties.getAliOss()
+			.getBucketName());
+	}
+
+	/**
+	 * 根据规则生成存储桶名称
+	 *
+	 * @param bucketName 存储桶名称
+	 * @return 存储桶名称
+	 */
+	private String getBucketName(String bucketName) {
+		return ossRule.bucketName(bucketName);
+	}
+
+	/**
+	 * 根据规则生成文件名称
+	 *
+	 * @param fileName 文件名称
+	 * @return 文件名称
+	 */
+	private String getFileName(String fileName) {
+		return ossRule.fileName(fileName);
+	}
+
 	/**
 	 * 创建 存储桶
 	 *
@@ -40,7 +91,9 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public void createBucket(String bucketName) {
-
+		if (bucketExists(bucketName)) {
+			ossClient.createBucket(getBucketName(bucketName));
+		}
 	}
 
 	/**
@@ -50,7 +103,9 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public void deleteBucket(String bucketName) {
-
+		if (bucketExists(bucketName)) {
+			ossClient.deleteBucket(getBucketName(bucketName));
+		}
 	}
 
 	/**
@@ -61,7 +116,7 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public boolean bucketExists(String bucketName) {
-		return false;
+		return ossClient.doesBucketExist(getBucketName(bucketName));
 	}
 
 	/**
@@ -73,7 +128,7 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public void copyFile(String sourceBucketName, String fileName, String targetBucketName) {
-
+		copyFile(sourceBucketName, fileName, targetBucketName, fileName);
 	}
 
 	/**
@@ -86,7 +141,7 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public void copyFile(String sourceBucketName, String fileName, String targetBucketName, String targetFileName) {
-
+		ossClient.copyObject(getBucketName(sourceBucketName), fileName, getBucketName(targetBucketName), targetFileName);
 	}
 
 	/**
@@ -97,7 +152,8 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public OssFileMetaInfo getFileMetaInfo(String fileName) {
-		return null;
+		return getFileMetaInfo(ossProperties.getAliOss()
+			.getBucketName(), fileName);
 	}
 
 	/**
@@ -109,7 +165,40 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public OssFileMetaInfo getFileMetaInfo(String bucketName, String fileName) {
-		return null;
+		ObjectMetadata metadata = ossClient.getObjectMetadata(getBucketName(bucketName), fileName);
+		OssFileMetaInfo metaInfo = new OssFileMetaInfo();
+		metaInfo.setName(fileName);
+		metaInfo.setLink(getFileLink(metaInfo.getName()));
+		metaInfo.setHash(metadata.getContentMD5());
+		metaInfo.setLength(metadata.getContentLength());
+		metaInfo.setUploadTime(metadata.getLastModified());
+		metaInfo.setContentType(metadata.getContentType());
+		return metaInfo;
+	}
+
+	/**
+	 * 获取 OSS 域名地址
+	 *
+	 * @param bucketName 存储桶名称
+	 * @return 域名地址
+	 */
+	private String getOssEndpoint(String bucketName) {
+		String prefix = ossProperties.getAliOss()
+			.getEndpoint()
+			.contains("https://") ? "https://" : "http://";
+		return prefix + getBucketName(bucketName) + StrUtil.DOT + ossProperties.getAliOss()
+			.getEndpoint()
+			.replaceFirst(prefix, StrUtil.EMPTY);
+	}
+
+	/**
+	 * 获取 OSS 域名地址
+	 *
+	 * @return 域名地址
+	 */
+	private String getOssEndpoint() {
+		return getOssEndpoint(ossProperties.getAliOss()
+			.getBucketName());
 	}
 
 	/**
@@ -120,7 +209,8 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public String getFilePath(String fileName) {
-		return null;
+		return getOssEndpoint().concat(StrUtil.SLASH)
+			.concat(fileName);
 	}
 
 	/**
@@ -132,7 +222,8 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public String getFilePath(String bucketName, String fileName) {
-		return null;
+		return getOssEndpoint(bucketName).concat(StrUtil.SLASH)
+			.concat(fileName);
 	}
 
 	/**
@@ -143,7 +234,8 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public String getFileLink(String fileName) {
-		return null;
+		return getOssEndpoint().concat(StrUtil.SLASH)
+			.concat(fileName);
 	}
 
 	/**
@@ -155,7 +247,8 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public String getFileLink(String bucketName, String fileName) {
-		return null;
+		return getOssEndpoint(bucketName).concat(StrUtil.SLASH)
+			.concat(fileName);
 	}
 
 	/**
@@ -166,7 +259,7 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public OssFile uploadFile(MultipartFile file) {
-		return null;
+		return uploadFile(file.getOriginalFilename(), file);
 	}
 
 	/**
@@ -178,7 +271,8 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public OssFile uploadFile(String fileName, MultipartFile file) {
-		return null;
+		return uploadFile(ossProperties.getAliOss()
+			.getBucketName(), fileName, file);
 	}
 
 	/**
@@ -190,8 +284,9 @@ public class AliOssTemplate implements OssTemplate {
 	 * @return 文件信息
 	 */
 	@Override
+	@SneakyThrows
 	public OssFile uploadFile(String bucketName, String fileName, MultipartFile file) {
-		return null;
+		return uploadFile(bucketName, fileName, file.getInputStream());
 	}
 
 	/**
@@ -203,7 +298,8 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public OssFile uploadFile(String fileName, InputStream stream) {
-		return null;
+		return uploadFile(ossProperties.getAliOss()
+			.getBucketName(), fileName, stream);
 	}
 
 	/**
@@ -216,7 +312,34 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public OssFile uploadFile(String bucketName, String fileName, InputStream stream) {
-		return null;
+		return upload(bucketName, fileName, stream, false);
+	}
+
+	private OssFile upload(String bucketName, String fileName, InputStream stream, boolean cover) {
+		// 创建存储桶
+		createBucket(bucketName);
+		// 获取 oss 存储文件名
+		String key = getFileName(fileName);
+
+		// 是否覆盖上传
+		if (cover) {
+			ossClient.putObject(getBucketName(bucketName), key, stream);
+		} else {
+			PutObjectResult response = ossClient.putObject(getBucketName(bucketName), key, stream);
+			int retry = 0;
+			int retryCount = 5;
+			// 重试 5 次
+			while (StrUtil.isEmpty(response.getETag()) && retry < retryCount) {
+				response = ossClient.putObject(getBucketName(bucketName), key, stream);
+				retry++;
+			}
+		}
+
+		OssFile ossFile = new OssFile();
+		ossFile.setName(key);
+		ossFile.setOriginalName(fileName);
+		ossFile.setLink(getFileLink(bucketName, key));
+		return ossFile;
 	}
 
 	/**
@@ -226,7 +349,7 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public void deleteFile(String fileName) {
-
+		ossClient.deleteObject(getBucketName(), fileName);
 	}
 
 	/**
@@ -237,7 +360,7 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public void deleteFile(String bucketName, String fileName) {
-
+		ossClient.deleteObject(getBucketName(bucketName), fileName);
 	}
 
 	/**
@@ -247,7 +370,7 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public void deleteFiles(List<String> fileNames) {
-
+		fileNames.forEach(this::deleteFile);
 	}
 
 	/**
@@ -258,6 +381,61 @@ public class AliOssTemplate implements OssTemplate {
 	 */
 	@Override
 	public void deleteFiles(String bucketName, List<String> fileNames) {
+		fileNames.forEach(fileName -> deleteFile(bucketName, fileName));
+	}
 
+	public String getUploadToken() {
+		return getUploadToken(ossProperties.getAliOss()
+			.getBucketName());
+	}
+
+	/**
+	 * 获取上传凭证，普通上传，默认 1 小时过期
+	 *
+	 * @param bucketName 存储桶名称
+	 * @return 上传凭证
+	 */
+	public String getUploadToken(String bucketName) {
+		// 默认过期时间1小时，单位 秒
+		return getUploadToken(bucketName, ossProperties.getAliOss()
+			.getArgs()
+			.get("expireTime", 60 * 60));
+	}
+
+	/**
+	 * 获取上传凭证，普通上传
+	 * TODO 上传大小限制、基础路径
+	 *
+	 * @param bucketName 存储桶名称
+	 * @param expireTime 过期时间，单位秒
+	 * @return 上传凭证
+	 */
+	public String getUploadToken(String bucketName, long expireTime) {
+		String baseDir = "upload";
+
+		long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
+		Date expiration = new Date(expireEndTime);
+
+		PolicyConditions policy = new PolicyConditions();
+		// 默认大小限制10M
+		policy.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, ossProperties.getAliOss()
+			.getArgs()
+			.get("contentLengthRange", 1024 * 1024 * 10));
+		policy.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, baseDir);
+
+		String postPolicy = ossClient.generatePostPolicy(expiration, policy);
+		byte[] binaryData = postPolicy.getBytes(StandardCharsets.UTF_8);
+		String encodedPolicy = BinaryUtil.toBase64String(binaryData);
+		String postSignature = ossClient.calculatePostSignature(postPolicy);
+
+		Map<String, String> respMap = new LinkedHashMap<>(16);
+		respMap.put("accessid", ossProperties.getAliOss()
+			.getAccessKey());
+		respMap.put("policy", encodedPolicy);
+		respMap.put("signature", postSignature);
+		respMap.put("dir", baseDir);
+		respMap.put("host", getOssEndpoint(bucketName));
+		respMap.put("expire", String.valueOf(expireEndTime / 1000));
+		return JSONUtil.toJsonStr(respMap);
 	}
 }
