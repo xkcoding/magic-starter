@@ -28,7 +28,7 @@ import java.util.HashMap;
  *
  * @author Chill
  */
-@SuppressWarnings({"unchecked","unused"})
+@SuppressWarnings("all")
 public class Kv extends LinkedCaseInsensitiveMap<Object> {
 
 
@@ -45,7 +45,7 @@ public class Kv extends LinkedCaseInsensitiveMap<Object> {
 		return new Kv();
 	}
 
-	public static HashMap<String,Object> newMap() {
+	public static HashMap newMap() {
 		return new HashMap<>(16);
 	}
 
@@ -87,7 +87,6 @@ public class Kv extends LinkedCaseInsensitiveMap<Object> {
 	 * @param defaultValue 默认值
 	 * @return 字段值
 	 */
-	@SuppressWarnings("unchecked")
 	public <T> T get(String attr, T defaultValue) {
 		final Object result = get(attr);
 		return (T) (result != null ? result : defaultValue);
