@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.xkcoding.magic.oss.autoconfigure;
+package com.xkcoding.magic.oss.autoconfigure.ali;
 
 import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.common.auth.CredentialsProvider;
 import com.aliyun.oss.common.auth.DefaultCredentialProvider;
+import com.xkcoding.magic.oss.autoconfigure.OssAutoConfiguration;
+import com.xkcoding.magic.oss.autoconfigure.OssProperties;
 import com.xkcoding.magic.oss.support.ali.AliOssTemplate;
 import com.xkcoding.magic.oss.support.rule.OssRule;
 import lombok.RequiredArgsConstructor;
