@@ -65,7 +65,7 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	public void createBucket(String bucketName) {
-		if (bucketExists(bucketName)) {
+		if (!bucketExists(bucketName)) {
 			ossClient.createBucket(getBucketName(bucketName));
 		}
 	}
