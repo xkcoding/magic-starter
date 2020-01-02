@@ -19,6 +19,7 @@ package com.xkcoding.magic.oss.autoconfigure;
 import com.xkcoding.magic.core.tool.constants.MagicConsts;
 import com.xkcoding.magic.core.tool.support.lang.Kv;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -35,19 +36,60 @@ public class OssProperties {
 	/**
 	 * 阿里云 OSS
 	 */
-	private CommonProperties aliOss = new CommonProperties();
+	private AliOssProperties aliOss = new AliOssProperties();
 	/**
 	 * 腾讯云 COS
 	 */
-	private CommonProperties tencentCos = new CommonProperties();
+	private TencentCosProperties tencentCos = new TencentCosProperties();
 	/**
 	 * 七牛云
 	 */
-	private CommonProperties qiniuCloud = new CommonProperties();
+	private QiNiuCloudProperties qiniuCloud = new QiNiuCloudProperties();
 	/**
 	 * MinIO
 	 */
-	private CommonProperties minIo = new CommonProperties();
+	private MinIoProperties minIo = new MinIoProperties();
+
+	/**
+	 * 阿里云 OSS 配置
+	 */
+	@Data
+	@EqualsAndHashCode(callSuper = true)
+	public static class AliOssProperties extends CommonProperties {
+	}
+
+	/**
+	 * 阿里云 OSS 配置
+	 */
+	@Data
+	@EqualsAndHashCode(callSuper = true)
+	public static class TencentCosProperties extends CommonProperties {
+		/**
+		 * App Id
+		 */
+		private String appId;
+
+		/**
+		 * 地区
+		 */
+		private String region;
+	}
+
+	/**
+	 * 七牛云存储配置
+	 */
+	@Data
+	@EqualsAndHashCode(callSuper = true)
+	public static class QiNiuCloudProperties extends CommonProperties {
+	}
+
+	/**
+	 * MinIO 配置
+	 */
+	@Data
+	@EqualsAndHashCode(callSuper = true)
+	public static class MinIoProperties extends CommonProperties {
+	}
 
 	/**
 	 * 通用配置
