@@ -48,7 +48,7 @@ import org.springframework.context.annotation.Configuration;
 public class AliOssAutoConfiguration {
 	private final OssProperties ossProperties;
 
-	@Bean
+	@Bean(destroyMethod = "shutdown")
 	@ConditionalOnMissingBean
 	public OSSClient ossClient() {
 		// 创建ClientConfiguration。ClientConfiguration是OSSClient的配置类，可配置代理、连接超时、最大连接数等参数。
