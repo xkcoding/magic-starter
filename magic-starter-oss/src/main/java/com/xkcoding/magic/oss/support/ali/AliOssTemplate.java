@@ -139,7 +139,7 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	public OssFileMetaInfo getFileMetaInfo(String bucketName, String fileName) {
-		ObjectMetadata metadata = ossClient.getObjectMetadata(getBucketName(bucketName), fileName);
+		final ObjectMetadata metadata = ossClient.getObjectMetadata(getBucketName(bucketName), fileName);
 		OssFileMetaInfo metaInfo = new OssFileMetaInfo();
 		metaInfo.setName(fileName);
 		metaInfo.setLink(getFileLink(metaInfo.getName()));
@@ -173,6 +173,19 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	private String getOssEndpoint() {
 		return getOssEndpoint(ossProperties.getAliOss()
 			.getBucketName());
+	}
+
+	/**
+	 * 添加协议
+	 *
+	 * @param bucketName 存储桶名称
+	 * @return 包含协议头
+	 */
+	public String getOssEndpointProtocolHost(String bucketName) {
+		String prefix = ossProperties.getAliOss()
+			.getEndpoint()
+			.contains("https://") ? "https://" : "http://";
+		return prefix + getOssEndpoint(bucketName);
 	}
 
 	/**
