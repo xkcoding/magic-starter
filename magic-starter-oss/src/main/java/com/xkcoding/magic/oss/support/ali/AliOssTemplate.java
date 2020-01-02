@@ -24,12 +24,12 @@ import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PolicyConditions;
 import com.aliyun.oss.model.PutObjectResult;
 import com.xkcoding.magic.core.tool.util.StrUtil;
-import com.xkcoding.magic.oss.OssTemplate;
+import com.xkcoding.magic.oss.AbstractOssTemplate;
 import com.xkcoding.magic.oss.autoconfigure.OssProperties;
+import com.xkcoding.magic.oss.enums.OssType;
 import com.xkcoding.magic.oss.model.OssFile;
 import com.xkcoding.magic.oss.model.OssFileMetaInfo;
 import com.xkcoding.magic.oss.support.rule.OssRule;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,40 +48,14 @@ import java.util.Map;
  * @author yangkai.shen
  * @date Created in 2019/12/31 17:19
  */
-@RequiredArgsConstructor
-public class AliOssTemplate implements OssTemplate {
+public class AliOssTemplate extends AbstractOssTemplate {
 	private final OSSClient ossClient;
 	private final OssProperties ossProperties;
-	private final OssRule ossRule;
 
-	/**
-	 * 根据配置文件获取存储桶名称
-	 *
-	 * @return 存储桶名称
-	 */
-	private String getBucketName() {
-		return getBucketName(ossProperties.getAliOss()
-			.getBucketName());
-	}
-
-	/**
-	 * 根据规则生成存储桶名称
-	 *
-	 * @param bucketName 存储桶名称
-	 * @return 存储桶名称
-	 */
-	private String getBucketName(String bucketName) {
-		return ossRule.bucketName(bucketName);
-	}
-
-	/**
-	 * 根据规则生成文件名称
-	 *
-	 * @param fileName 文件名称
-	 * @return 文件名称
-	 */
-	private String getFileName(String fileName) {
-		return ossRule.fileName(fileName);
+	public AliOssTemplate(OSSClient ossClient, OssProperties ossProperties, OssRule ossRule) {
+		super(ossProperties, ossRule, OssType.ALI_OSS);
+		this.ossClient = ossClient;
+		this.ossProperties = ossProperties;
 	}
 
 	/**
