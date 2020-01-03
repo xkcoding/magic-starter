@@ -57,10 +57,8 @@ public class TencentCosTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	protected String getBucketName() {
-		return super.getBucketName()
-			.concat(StrUtil.DASHED)
-			.concat(ossProperties.getTencentCos()
-				.getAppId());
+		return getBucketName(ossProperties.getTencentCos()
+			.getBucketName());
 	}
 
 	/**
