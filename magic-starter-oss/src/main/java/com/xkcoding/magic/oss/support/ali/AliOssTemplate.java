@@ -153,6 +153,16 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	/**
 	 * 获取 OSS 域名地址
 	 *
+	 * @return 域名地址
+	 */
+	private String getOssEndpoint() {
+		return getOssEndpoint(ossProperties.getAliOss()
+			.getBucketName());
+	}
+
+	/**
+	 * 获取 OSS 域名地址
+	 *
 	 * @param bucketName 存储桶名称
 	 * @return 域名地址
 	 */
@@ -166,13 +176,15 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	}
 
 	/**
-	 * 获取 OSS 域名地址
+	 * 添加协议
 	 *
-	 * @return 域名地址
+	 * @return 包含协议头
 	 */
-	private String getOssEndpoint() {
-		return getOssEndpoint(ossProperties.getAliOss()
-			.getBucketName());
+	public String getOssEndpointProtocolHost() {
+		String prefix = ossProperties.getAliOss()
+			.getEndpoint()
+			.contains("https://") ? "https://" : "http://";
+		return prefix + getOssEndpoint();
 	}
 
 	/**
@@ -221,7 +233,7 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	public String getFileLink(String fileName) {
-		return getOssEndpoint().concat(StrUtil.SLASH)
+		return getOssEndpointProtocolHost().concat(StrUtil.SLASH)
 			.concat(fileName);
 	}
 
@@ -234,7 +246,7 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	public String getFileLink(String bucketName, String fileName) {
-		return getOssEndpoint(bucketName).concat(StrUtil.SLASH)
+		return getOssEndpointProtocolHost(bucketName).concat(StrUtil.SLASH)
 			.concat(fileName);
 	}
 
