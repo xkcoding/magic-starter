@@ -19,10 +19,7 @@ package com.xkcoding.magic.oss.support.ali;
 import cn.hutool.json.JSONUtil;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.common.utils.BinaryUtil;
-import com.aliyun.oss.model.MatchMode;
-import com.aliyun.oss.model.ObjectMetadata;
-import com.aliyun.oss.model.PolicyConditions;
-import com.aliyun.oss.model.PutObjectResult;
+import com.aliyun.oss.model.*;
 import com.xkcoding.magic.core.tool.util.StrUtil;
 import com.xkcoding.magic.oss.AbstractOssTemplate;
 import com.xkcoding.magic.oss.autoconfigure.OssProperties;
@@ -67,6 +64,7 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	public void createBucket(String bucketName) {
 		if (!bucketExists(bucketName)) {
 			ossClient.createBucket(getBucketName(bucketName));
+			ossClient.setBucketAcl(getBucketName(bucketName), CannedAccessControlList.PublicRead);
 		}
 	}
 
@@ -168,36 +166,11 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	 */
 	private String getOssEndpoint(String bucketName) {
 		String prefix = ossProperties.getAliOss()
-			.getEndpoint()
-			.contains("https://") ? "https://" : "http://";
+			.getHttps() ? "https://" : "http://";
+
 		return prefix + getBucketName(bucketName) + StrUtil.DOT + ossProperties.getAliOss()
 			.getEndpoint()
 			.replaceFirst(prefix, StrUtil.EMPTY);
-	}
-
-	/**
-	 * 添加协议
-	 *
-	 * @return 包含协议头
-	 */
-	public String getOssEndpointProtocolHost() {
-		String prefix = ossProperties.getAliOss()
-			.getEndpoint()
-			.contains("https://") ? "https://" : "http://";
-		return prefix + getOssEndpoint();
-	}
-
-	/**
-	 * 添加协议
-	 *
-	 * @param bucketName 存储桶名称
-	 * @return 包含协议头
-	 */
-	public String getOssEndpointProtocolHost(String bucketName) {
-		String prefix = ossProperties.getAliOss()
-			.getEndpoint()
-			.contains("https://") ? "https://" : "http://";
-		return prefix + getOssEndpoint(bucketName);
 	}
 
 	/**
@@ -233,7 +206,7 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	public String getFileLink(String fileName) {
-		return getOssEndpointProtocolHost().concat(StrUtil.SLASH)
+		return getOssEndpoint().concat(StrUtil.SLASH)
 			.concat(fileName);
 	}
 
@@ -246,7 +219,7 @@ public class AliOssTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	public String getFileLink(String bucketName, String fileName) {
-		return getOssEndpointProtocolHost(bucketName).concat(StrUtil.SLASH)
+		return getOssEndpoint(bucketName).concat(StrUtil.SLASH)
 			.concat(fileName);
 	}
 

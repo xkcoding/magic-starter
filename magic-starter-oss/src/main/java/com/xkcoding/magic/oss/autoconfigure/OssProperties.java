@@ -56,6 +56,10 @@ public class OssProperties {
 	@Data
 	@EqualsAndHashCode(callSuper = true)
 	public static class AliOssProperties extends CommonProperties {
+		/**
+		 * 是否使用 https
+		 */
+		private Boolean https = false;
 	}
 
 	/**
@@ -73,6 +77,11 @@ public class OssProperties {
 		 * 地区
 		 */
 		private String region;
+
+		/**
+		 * 是否使用 https
+		 */
+		private Boolean https = false;
 	}
 
 	/**

@@ -20,6 +20,7 @@ import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
+import com.qiniu.storage.model.AclType;
 import com.qiniu.storage.model.FileInfo;
 import com.qiniu.util.Auth;
 import com.xkcoding.magic.core.tool.util.CollUtil;
@@ -70,6 +71,7 @@ public class QiNiuCloudTemplate extends AbstractOssTemplate {
 		if (!bucketExists(bucketName)) {
 			bucketManager.createBucket(getBucketName(bucketName), Zone.autoZone()
 				.getRegion());
+			bucketManager.putBucketAccessMode(getBucketName(bucketName), AclType.PUBLIC);
 		}
 	}
 

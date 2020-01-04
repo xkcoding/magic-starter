@@ -17,6 +17,7 @@
 package com.xkcoding.magic.oss.support.tencent;
 
 import com.qcloud.cos.COSClient;
+import com.qcloud.cos.model.CannedAccessControlList;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectResult;
 import com.xkcoding.magic.core.tool.util.StrUtil;
@@ -84,6 +85,7 @@ public class TencentCosTemplate extends AbstractOssTemplate {
 	public void createBucket(String bucketName) {
 		if (!bucketExists(bucketName)) {
 			cosClient.createBucket(getBucketName(bucketName));
+			cosClient.setBucketAcl(getBucketName(bucketName), CannedAccessControlList.PublicRead);
 		}
 	}
 
@@ -185,36 +187,11 @@ public class TencentCosTemplate extends AbstractOssTemplate {
 	 */
 	private String getCosEndpoint(String bucketName) {
 		String prefix = ossProperties.getTencentCos()
-			.getEndpoint()
-			.contains("https://") ? "https://" : "http://";
-		return prefix + getBucketName(bucketName) + StrUtil.DOT + ossProperties.getTencentCos()
-			.getEndpoint()
-			.replaceFirst(prefix, StrUtil.EMPTY);
-	}
+			.getHttps() ? "https://" : "http://";
 
-	/**
-	 * 添加协议
-	 *
-	 * @return 包含协议头
-	 */
-	public String getCosEndpointProtocolHost() {
-		String prefix = ossProperties.getTencentCos()
-			.getEndpoint()
-			.contains("https://") ? "https://" : "http://";
-		return prefix + getCosEndpoint();
-	}
-
-	/**
-	 * 添加协议
-	 *
-	 * @param bucketName 存储桶名称
-	 * @return 包含协议头
-	 */
-	public String getCosEndpointProtocolHost(String bucketName) {
-		String prefix = ossProperties.getTencentCos()
-			.getEndpoint()
-			.contains("https://") ? "https://" : "http://";
-		return prefix + getCosEndpoint(bucketName);
+		return prefix + cosClient.getClientConfig()
+			.getEndpointBuilder()
+			.buildGeneralApiEndpoint(getBucketName(bucketName));
 	}
 
 	/**
@@ -250,7 +227,7 @@ public class TencentCosTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	public String getFileLink(String fileName) {
-		return getCosEndpointProtocolHost().concat(StrUtil.SLASH)
+		return getCosEndpoint().concat(StrUtil.SLASH)
 			.concat(fileName);
 	}
 
@@ -263,7 +240,7 @@ public class TencentCosTemplate extends AbstractOssTemplate {
 	 */
 	@Override
 	public String getFileLink(String bucketName, String fileName) {
-		return getCosEndpointProtocolHost(bucketName).concat(StrUtil.SLASH)
+		return getCosEndpoint(bucketName).concat(StrUtil.SLASH)
 			.concat(fileName);
 	}
 
