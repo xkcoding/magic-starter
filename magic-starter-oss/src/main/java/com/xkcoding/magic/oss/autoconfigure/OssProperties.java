@@ -63,7 +63,7 @@ public class OssProperties {
 	}
 
 	/**
-	 * 阿里云 OSS 配置
+	 * 腾讯云 OSS 配置
 	 */
 	@Data
 	@EqualsAndHashCode(callSuper = true)
@@ -74,7 +74,7 @@ public class OssProperties {
 		private String appId;
 
 		/**
-		 * 地区
+		 * 区域简称，https://cloud.tencent.com/document/product/436/6224
 		 */
 		private String region;
 
@@ -90,6 +90,10 @@ public class OssProperties {
 	@Data
 	@EqualsAndHashCode(callSuper = true)
 	public static class QiNiuCloudProperties extends CommonProperties {
+		/**
+		 * 区域简称，https://developer.qiniu.com/kodo/manual/1671/region-endpoint
+		 */
+		private String region;
 	}
 
 	/**

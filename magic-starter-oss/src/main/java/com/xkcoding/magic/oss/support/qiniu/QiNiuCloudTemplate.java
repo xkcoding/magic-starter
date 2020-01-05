@@ -16,7 +16,6 @@
 
 package com.xkcoding.magic.oss.support.qiniu;
 
-import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
@@ -69,7 +68,7 @@ public class QiNiuCloudTemplate extends AbstractOssTemplate {
 	@SneakyThrows
 	public void createBucket(String bucketName) {
 		if (!bucketExists(bucketName)) {
-			bucketManager.createBucket(getBucketName(bucketName), Zone.autoZone()
+			bucketManager.createBucket(getBucketName(bucketName), ossProperties.getQiniuCloud()
 				.getRegion());
 			bucketManager.putBucketAccessMode(getBucketName(bucketName), AclType.PUBLIC);
 		}
