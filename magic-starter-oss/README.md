@@ -11,5 +11,5 @@
 
 ## 简介
 
-`magic-starter-oss` 主要是对一些常用的对象存储的封装，包括七牛云bucket、阿里云OSS、腾讯云COS、minio等。
+`magic-starter-oss` 主要是对一些常用的对象存储的封装，包括七牛云存储、阿里云OSS、腾讯云COS、minio。
 
