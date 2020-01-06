@@ -11,5 +11,167 @@
 
 ## 简介
 
-`magic-starter-oss` 主要是对一些常用的对象存储的封装，包括七牛云存储、阿里云OSS、腾讯云COS、minio。
+`magic-starter-oss` 主要是对一些常用的对象存储的封装，支持`阿里云OSS、腾讯云COS、七牛云存储、MinIO`。
 
+## 使用
+
+```xml
+<dependency>
+  <groupId>com.xkcoding</groupId>
+  <artifactId>magic-starter-oss</artifactId>
+  <version>${magic-starter.version}</version>
+</dependency>
+```
+
+## 快速上手
+
+> magic-starter-oss 提供了 4 种常见的对象云存储的支持。
+>
+> 1. 阿里云 OSS
+> 2. 腾讯云 COS
+> 3. 七牛云存储
+> 4. MinIO 自建
+>
+> 懒人请直接看demo：https://github.com/xkcoding/magic-starter-oss-demo
+
+### 配置
+
+#### 阿里云 OSS
+
+##### 引入依赖
+
+```xml
+<dependency>
+  <groupId>com.aliyun.oss</groupId>
+  <artifactId>aliyun-sdk-oss</artifactId>
+  <version>${aliyun.oss.version}</version>
+</dependency>
+```
+
+##### 配置文件
+
+```yaml
+magic:
+  oss:
+    ali-oss:
+      enabled: true
+      access-key: LTA**************WHXtC
+      secret-key: PQw*************************r3
+      endpoint: oss-cn-hangzhou.aliyuncs.com
+      bucket-name: test
+      https: true
+```
+
+#### 腾讯云 COS
+
+##### 引入依赖
+
+```xml
+<dependency>
+  <groupId>com.qcloud</groupId>
+  <artifactId>cos_api</artifactId>
+  <version>${qcloud.oss.version}</version>
+</dependency>
+```
+
+##### 配置文件
+
+```yaml
+magic:
+  oss:
+    tencent-cos:
+      enabled: true
+      app-id: 125****51
+      access-key: AK****************************at1pg
+      secret-key: npJ****************************nqz
+      bucket-name: test
+      region: ap-shanghai
+      https: true
+```
+
+#### 七牛云
+
+##### 引入依赖
+
+```xml
+<dependency>
+  <groupId>com.qiniu</groupId>
+  <artifactId>qiniu-java-sdk</artifactId>
+  <version>${qiniu.oss.version}</version>
+</dependency>
+```
+
+##### 配置文件
+
+```yaml
+magic:
+  oss:
+    qiniu-cloud:
+      enabled: true
+      access-key: 9Qx*****************9jtENhZ-sTGV**********f5Rd
+      secret-key: 8izWd*****************************Ccgd
+      bucket-name: test
+      endpoint: http://q3**********cho.bkt.clouddn.com
+      region: z0
+```
+
+#### MinIO
+
+##### 引入依赖
+
+```xml
+<dependency>
+  <groupId>io.minio</groupId>
+  <artifactId>minio</artifactId>
+  <version>${minio.oss.version}</version>
+</dependency>
+```
+
+##### 配置文件
+
+```yaml
+magic:
+  oss:
+    min-io:
+      enabled: true
+      access-key: minioadmin
+      secret-key: minioadmin
+      bucket-name: test
+      endpoint: http://192.168.31.8:9000
+```
+
+### 使用
+
+#### 阿里云 OSS
+
+```java
+@Autowired
+private AliOssTemplate aliOssTemplate;
+```
+
+#### 腾讯云 COS
+
+```java
+@Autowired
+private TencentCosTemplate tencentCosTemplate;
+```
+
+#### 七牛云
+
+```java
+@Autowired
+private QiNiuCloudTemplate qiNiuCloudTemplate;
+```
+
+#### MinIO
+
+```java
+@Autowired
+private MinIoTemplate minIoTemplate;
+```
+
+## 特点
+
+- 提供了存储桶生成策略、及文件名生成策略，用户自定义只需要自定义 `com.xkcoding.magic.oss.support.rule.OssRule`，同时加入到 Spring 容器中即可
+- 提供了统一的操作接口，`com.xkcoding.magic.oss.OssTemplate` 后续集成其他对象存储，只需要实现该接口即可
+- 虽然有 4 种实现，但是对外暴露的 API 一致，减去记忆的烦恼
