@@ -23,6 +23,6 @@
 - [x] 通用消息通知封装模块：magic-starter-message
 - [ ] 限流组件模块：magic-starter-ratelimiter
 - [ ] 分布式锁模块：magic-starter-locker
-- [ ] 通用对象存储封装模块：magic-starter-oss
+- [x] 通用对象存储封装模块：magic-starter-oss
 - [x] 分布式主键生成器模块：magic-starter-id
   
