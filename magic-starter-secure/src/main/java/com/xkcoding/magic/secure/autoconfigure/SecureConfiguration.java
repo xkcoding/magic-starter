@@ -31,7 +31,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -47,7 +46,7 @@ import java.util.List;
 @AutoConfigureBefore({SecureAutoConfiguration.class})
 @EnableConfigurationProperties({SecureProperties.class})
 @ConditionalOnProperty(value = "magic.secure.enabled", havingValue = "true", matchIfMissing = true)
-public class SecureConfiguration implements WebMvcConfigurer {
+public class SecureConfiguration {
 	@Bean
 	public JwtUtil jwtUtil(SecureProperties properties) {
 		return new JwtUtil(properties);
