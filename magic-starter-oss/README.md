@@ -11,7 +11,7 @@
 
 ## 简介
 
-`magic-starter-oss` 主要是对一些常用的对象存储的封装，支持`阿里云OSS、腾讯云COS、七牛云存储、MinIO`。
+`magic-starter-oss` 主要是对一些常用的对象存储的封装，支持`阿里云OSS、腾讯云COS、七牛云存储、MinIO`、`AwsS3`。
 
 ## 使用
 
@@ -25,12 +25,13 @@
 
 ## 快速上手
 
-> magic-starter-oss 提供了 4 种常见的对象云存储的支持。
+> magic-starter-oss 提供了 5 种常见的对象云存储的支持。
 >
 > 1. 阿里云 OSS
 > 2. 腾讯云 COS
 > 3. 七牛云存储
 > 4. MinIO 自建
+> 5. AwsS3 服务
 >
 > 懒人请直接看demo：https://github.com/xkcoding/magic-starter-oss-demo
 
@@ -140,6 +141,33 @@ magic:
       endpoint: http://192.168.31.8:9000
 ```
 
+#### AwsS3
+
+##### 引入依赖
+
+```xml
+<dependency>
+  <groupId>com.amazonaws</groupId>
+  <artifactId>aws-java-sdk-s3</artifactId>
+  <version>${awss3.oss.version}</version>
+</dependency>
+```
+
+##### 配置文件
+
+```yaml
+magic:
+  oss:
+    aws-s3:
+      enabled: true
+      access-key: accesskey
+      secret-key: secretkey
+      bucket-name: tmp
+      endpoint: https://***.amazonaws.com
+      https: true
+      region: xxx-west-1 # 自建服务,可不填
+```
+
 ### 使用
 
 #### 阿里云 OSS
@@ -170,8 +198,15 @@ private QiNiuCloudTemplate qiNiuCloudTemplate;
 private MinIoTemplate minIoTemplate;
 ```
 
+#### AwsS3
+
+```java
+@Autowired
+private AwsS3Template awsS3Template;
+```
+
 ## 特点
 
 - 提供了存储桶生成策略、及文件名生成策略，用户自定义只需要自定义 `com.xkcoding.magic.oss.support.rule.OssRule`，同时加入到 Spring 容器中即可
 - 提供了统一的操作接口，`com.xkcoding.magic.oss.OssTemplate` 后续集成其他对象存储，只需要实现该接口即可
-- 虽然有 4 种实现，但是对外暴露的 API 一致，减去记忆的烦恼
+- 虽然有 5 种实现，但是对外暴露的 API 一致，减去记忆的烦恼

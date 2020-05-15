@@ -49,6 +49,10 @@ public class OssProperties {
 	 * MinIO
 	 */
 	private MinIoProperties minIo = new MinIoProperties();
+	/**
+	 * AwsS3
+	 */
+	private AwsS3Properties awsS3 = new AwsS3Properties();
 
 	/**
 	 * 阿里云 OSS 配置
@@ -102,6 +106,24 @@ public class OssProperties {
 	@Data
 	@EqualsAndHashCode(callSuper = true)
 	public static class MinIoProperties extends CommonProperties {
+	}
+
+	/**
+	 * AwsS3 配置
+	 */
+	@Data
+	@EqualsAndHashCode(callSuper = true)
+	public static class AwsS3Properties extends CommonProperties {
+		/**
+		 * 是否使用 https
+		 */
+		private Boolean https = false;
+
+		/**
+		 * 设置区,自建服务,可不填
+		 * the region to use for SigV4 signing of requests (e.g. us-west-1)
+		 */
+		private String region;
 	}
 
 	/**

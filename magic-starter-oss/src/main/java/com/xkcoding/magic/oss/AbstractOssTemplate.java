@@ -60,6 +60,10 @@ public abstract class AbstractOssTemplate implements OssTemplate {
 				defaultBucketName = ossProperties.getMinIo()
 					.getBucketName();
 				break;
+			case AWSS3:
+				defaultBucketName = ossProperties.getAwsS3()
+					.getBucketName();
+				break;
 			default:
 				defaultBucketName = MagicConsts.MAGIC;
 				break;

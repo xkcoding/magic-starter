@@ -31,7 +31,7 @@
   <packaging>jar</packaging>
 
   <description>
-    Magic Oss 集成多种对象存储，包括七牛云bucket、阿里云OSS、腾讯云COS、minio
+    Magic Oss 集成多种对象存储，包括七牛云bucket、阿里云OSS、腾讯云COS、minio、AwsS3
   </description>
 
   <properties>
@@ -39,6 +39,7 @@
     <qcloud.oss.version>5.6.8</qcloud.oss.version>
     <qiniu.oss.version>7.2.23</qiniu.oss.version>
     <minio.oss.version>6.0.7</minio.oss.version>
+    <awss3.oss.version>1.11.782</awss3.oss.version>
   </properties>
 
   <dependencies>
@@ -78,6 +79,12 @@
       <groupId>io.minio</groupId>
       <artifactId>minio</artifactId>
       <version>${minio.oss.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-s3</artifactId>
+      <version>${awss3.oss.version}</version>
       <scope>provided</scope>
     </dependency>
 
