@@ -45,5 +45,9 @@ public enum OssType {
 	/**
 	 * MinIO
 	 */
-	MINIO;
+	MINIO,
+	/**
+	 * AwsS3
+	 */
+	AWSS3;
 }

@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * <p>
- * 七牛云存储自动装配类
+ * MinIo 存储自动装配类
  * </p>
  *
  * @author yangkai.shen
