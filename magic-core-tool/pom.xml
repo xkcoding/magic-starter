@@ -35,7 +35,7 @@
   </description>
 
   <properties>
-    <guava.version>28.1-jre</guava.version>
+    <guava.version>29.0-jre</guava.version>
     <hutool.version>5.0.4</hutool.version>
     <ip2region.version>1.7.2</ip2region.version>
     <pagehelper.version>5.1.10</pagehelper.version>
